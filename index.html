@@ -9,136 +9,140 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0f0f0f;
-  --bg2: #161616;
-  --bg3: #1e1e1e;
-  --bg4: #252525;
-  --border: #2a2a2a;
-  --border2: #333;
-  --text: #e8e8e8;
-  --text2: #888;
-  --text3: #555;
-  --accent: #c8f04a;
-  --accent2: #a8d030;
-  --blue: #4a9eff;
-  --green: #4ade80;
-  --amber: #fbbf24;
-  --red: #f87171;
-  --mono: 'IBM Plex Mono', monospace;
+  --bg: #f5f4f0;
+  --bg2: #ffffff;
+  --bg3: #f0efeb;
+  --bg4: #e8e6e0;
+  --border: #e2e0d8;
+  --border2: #ccc9be;
+  --text: #1a1a18;
+  --text2: #5a5a52;
+  --text3: #9a9a90;
+  --accent: #1a7a5e;
+  --accent2: #145f49;
+  --accent-bg: #eaf4f0;
+  --green: #1a7a5e;
+  --amber: #b45309;
+  --red: #b91c1c;
+  --blue: #1d4ed8;
   --sans: 'IBM Plex Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 13px; }
 body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
 
-/* Layout */
 .app { display: flex; flex-direction: column; min-height: 100vh; }
-.topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 24px; display: flex; align-items: center; gap: 20px; height: 52px; position: sticky; top: 0; z-index: 100; }
-.logo { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--accent); letter-spacing: 0.05em; }
-.logo span { color: var(--text2); font-weight: 400; }
+
+/* Topbar */
+.topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 28px; display: flex; align-items: center; gap: 24px; height: 52px; position: sticky; top: 0; z-index: 100; }
+.logo { font-size: 14px; font-weight: 500; color: var(--text); letter-spacing: -0.01em; }
+.logo strong { font-weight: 700; }
+.logo span { color: var(--text3); font-weight: 400; font-size: 12px; margin-left: 6px; }
 .topbar-center { flex: 1; display: flex; justify-content: center; }
-.tabs { display: flex; gap: 2px; background: var(--bg3); border-radius: 6px; padding: 3px; }
-.tab { padding: 5px 16px; font-size: 11px; font-family: var(--mono); font-weight: 500; letter-spacing: 0.04em; border-radius: 4px; cursor: pointer; color: var(--text2); border: none; background: none; transition: all 0.15s; }
-.tab:hover { color: var(--text); }
-.tab.active { background: var(--bg4); color: var(--accent); }
+.tabs { display: flex; gap: 0; border-bottom: none; }
+.tab { padding: 0 18px; height: 52px; display: flex; align-items: center; font-size: 12px; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; cursor: pointer; color: var(--text3); border: none; background: none; border-bottom: 2px solid transparent; transition: all 0.15s; position: relative; top: 1px; }
+.tab:hover { color: var(--text2); }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
 .topbar-right { display: flex; gap: 8px; align-items: center; }
-.pill { font-family: var(--mono); font-size: 10px; padding: 3px 8px; border-radius: 20px; border: 1px solid var(--border2); color: var(--text2); }
-.content { flex: 1; padding: 24px; max-width: 1600px; margin: 0 auto; width: 100%; }
+.pill { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border2); color: var(--text2); background: var(--bg3); }
+
+.content { flex: 1; padding: 24px 28px; max-width: 1600px; margin: 0 auto; width: 100%; }
 
 /* Panels */
 .panel { display: none; }
 .panel.active { display: block; }
 
 /* Buttons */
-.btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 11px; font-family: var(--mono); font-weight: 500; border-radius: 5px; cursor: pointer; transition: all 0.15s; border: 1px solid; }
-.btn-accent { background: var(--accent); color: #0f0f0f; border-color: var(--accent); }
+.btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12px; font-weight: 500; border-radius: 5px; cursor: pointer; transition: all 0.15s; border: 1px solid; font-family: var(--sans); }
+.btn-accent { background: var(--accent); color: #fff; border-color: var(--accent); }
 .btn-accent:hover { background: var(--accent2); border-color: var(--accent2); }
 .btn-ghost { background: transparent; color: var(--text2); border-color: var(--border2); }
-.btn-ghost:hover { color: var(--text); border-color: var(--border2); background: var(--bg3); }
-.btn-green { background: transparent; color: var(--green); border-color: #2a5a3a; }
-.btn-green:hover { background: #1a3a2a; }
-.btn-disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.btn-ghost:hover { color: var(--text); background: var(--bg3); }
+.btn-green { background: var(--accent-bg); color: var(--accent); border-color: #a3d4c5; }
+.btn-green:hover { background: #d5ece6; }
+.btn-disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
 /* Upload zone */
-.upload-zone { border: 1px dashed var(--border2); border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg2); }
-.upload-zone:hover { border-color: var(--accent); background: #161f0a; }
-.upload-icon { font-size: 28px; margin-bottom: 8px; color: var(--text3); }
-.upload-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-.upload-sub { font-size: 11px; color: var(--text2); font-family: var(--mono); }
-.upload-zone.loaded { border-color: var(--green); background: #0a1f12; }
-.upload-zone.loaded .upload-icon { color: var(--green); }
-.upload-zone.loaded .upload-title { color: var(--green); }
+.upload-zone { border: 1.5px dashed var(--border2); border-radius: 8px; padding: 18px 14px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg3); }
+.upload-zone:hover { border-color: var(--accent); background: var(--accent-bg); }
+.upload-icon { font-size: 22px; margin-bottom: 6px; color: var(--text3); }
+.upload-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.upload-sub { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+.upload-zone.loaded { border-color: var(--accent); background: var(--accent-bg); }
+.upload-zone.loaded .upload-icon { color: var(--accent); }
+.upload-zone.loaded .upload-title { color: var(--accent); }
 
-/* Despacho selector */
-.desp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.desp-card { border: 1px solid var(--border); border-radius: 7px; padding: 12px 14px; cursor: pointer; background: var(--bg2); transition: all 0.15s; }
+/* Despacho cards */
+.desp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.desp-card { border: 1px solid var(--border); border-radius: 7px; padding: 10px 12px; cursor: pointer; background: var(--bg2); transition: all 0.15s; }
 .desp-card:hover { border-color: var(--border2); background: var(--bg3); }
-.desp-card.active { border-color: var(--accent); background: #161f0a; }
-.desp-day { font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.desp-card.active { border-color: var(--accent); background: var(--accent-bg); }
+.desp-day { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
 .desp-card.active .desp-day { color: var(--accent); }
-.desp-time { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-bottom: 6px; }
+.desp-time { font-size: 10px; color: var(--text3); font-family: var(--mono); margin-bottom: 4px; }
 .desp-cov { font-size: 11px; color: var(--text2); }
-.desp-card.active .desp-cov { color: var(--text); }
+.desp-card.active .desp-cov { color: var(--accent2); }
 
 /* Messages */
-.msg { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 6px; font-size: 11px; font-family: var(--mono); margin-bottom: 12px; }
-.msg-ok { background: #0a1f12; border: 1px solid #2a5a3a; color: var(--green); }
-.msg-err { background: #1f0a0a; border: 1px solid #5a2a2a; color: var(--red); }
-.msg-info { background: #0a1220; border: 1px solid #1a3a5a; color: var(--blue); }
+.msg { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 6px; font-size: 12px; margin-bottom: 12px; }
+.msg-ok { background: var(--accent-bg); border: 1px solid #a3d4c5; color: var(--accent); }
+.msg-err { background: #fef2f2; border: 1px solid #fca5a5; color: var(--red); }
+.msg-info { background: #eff6ff; border: 1px solid #93c5fd; color: var(--blue); }
 .msg::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 
-/* Metrics row */
-.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
-.metric { background: var(--bg2); border: 1px solid var(--border); border-radius: 7px; padding: 12px 14px; }
-.metric-label { font-size: 10px; font-family: var(--mono); color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }
-.metric-value { font-size: 20px; font-weight: 300; color: var(--text); font-family: var(--mono); }
-.metric-value.accent { color: var(--accent); }
+/* Metrics */
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.metric { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.metric-label { font-size: 11px; color: var(--text3); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 5px; font-weight: 500; }
+.metric-value { font-size: 22px; font-weight: 300; color: var(--text); font-family: var(--mono); }
+.metric-value.accent { color: var(--accent); font-weight: 500; }
 
 /* Tables */
-.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
-table { border-collapse: collapse; width: 100%; font-size: 11px; }
-thead th { background: var(--bg3); font-family: var(--mono); font-weight: 500; font-size: 10px; padding: 8px 6px; text-align: center; border-bottom: 1px solid var(--border); color: var(--text2); white-space: nowrap; letter-spacing: 0.04em; position: sticky; top: 0; }
-thead th.lft { text-align: left; min-width: 200px; padding-left: 12px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--bg2); }
+table { border-collapse: collapse; width: 100%; font-size: 12px; }
+thead th { background: var(--bg3); font-weight: 500; font-size: 11px; padding: 9px 7px; text-align: center; border-bottom: 1px solid var(--border); color: var(--text2); white-space: nowrap; letter-spacing: 0.02em; position: sticky; top: 0; }
+thead th.lft { text-align: left; min-width: 200px; padding-left: 14px; }
 thead th.sml { min-width: 0; width: 36px; }
 tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
 tbody tr:last-child { border-bottom: none; }
-tbody tr:hover { background: var(--bg3); }
-tbody tr.section-row td { background: var(--bg3); font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 12px; border-bottom: 1px solid var(--border); }
-td { padding: 5px 6px; text-align: center; color: var(--text2); vertical-align: middle; }
-td.lft { text-align: left; color: var(--text); padding-left: 12px; }
-td.num { font-family: var(--mono); font-size: 10px; color: var(--text3); }
-.v-send { color: var(--green); font-weight: 500; font-family: var(--mono); }
+tbody tr:hover { background: #faf9f6; }
+tbody tr.section-row td { background: var(--bg3); font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-bottom: 1px solid var(--border); }
+td { padding: 6px 7px; text-align: center; color: var(--text2); vertical-align: middle; }
+td.lft { text-align: left; color: var(--text); padding-left: 14px; }
+td.num { font-family: var(--mono); font-size: 11px; color: var(--text3); }
+.v-send { color: var(--green); font-weight: 600; font-family: var(--mono); }
 .v-part { color: var(--amber); font-weight: 500; font-family: var(--mono); }
 .v-zero { color: var(--text3); font-family: var(--mono); }
-.v-bold { font-weight: 500; color: var(--text); font-family: var(--mono); }
-tr.total-row td { background: var(--bg3); font-family: var(--mono); font-weight: 500; color: var(--text); border-top: 1px solid var(--border2); }
-.tipo-a { font-family: var(--mono); font-size: 10px; font-weight: 500; color: #7dd3fc; }
-.tipo-b { font-family: var(--mono); font-size: 10px; font-weight: 500; color: #86efac; }
-.tipo-c { font-family: var(--mono); font-size: 10px; font-weight: 500; color: #fcd34d; }
+.v-bold { font-weight: 600; color: var(--text); font-family: var(--mono); }
+tr.total-row td { background: var(--bg3); font-weight: 600; color: var(--text); border-top: 1px solid var(--border2); font-family: var(--mono); }
+.tipo-a { font-size: 10px; font-weight: 600; color: #1d4ed8; background: #eff6ff; padding: 1px 5px; border-radius: 3px; }
+.tipo-b { font-size: 10px; font-weight: 600; color: #15803d; background: #f0fdf4; padding: 1px 5px; border-radius: 3px; }
+.tipo-c { font-size: 10px; font-weight: 600; color: #92400e; background: #fffbeb; padding: 1px 5px; border-radius: 3px; }
 
-/* Estimate table specific */
-.est-vie { color: #7dd3fc; font-family: var(--mono); }
-.est-sab { color: #86efac; font-family: var(--mono); }
-.est-dom { color: #fcd34d; font-family: var(--mono); }
-.est-tot { color: var(--text); font-family: var(--mono); font-weight: 500; }
+/* Estimate colors */
+.est-vie { color: #1d4ed8; font-family: var(--mono); }
+.est-sab { color: #15803d; font-family: var(--mono); }
+.est-dom { color: #b45309; font-family: var(--mono); }
+.est-tot { color: var(--text); font-family: var(--mono); font-weight: 600; }
 
-/* Section dividers in sidebar layout */
-.two-col { display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start; }
-.sidebar { display: flex; flex-direction: column; gap: 12px; }
+/* Layout */
+.two-col { display: grid; grid-template-columns: 270px 1fr; gap: 20px; align-items: start; }
+.sidebar { display: flex; flex-direction: column; gap: 10px; }
 .section-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
-.section-card h3 { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
+.section-card h3 { font-size: 10px; font-weight: 600; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 10px; }
 
-/* Day selector for estimates */
-.day-tabs { display: flex; gap: 4px; margin-bottom: 14px; }
-.day-tab { padding: 5px 14px; font-size: 11px; font-family: var(--mono); border-radius: 4px; cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--text2); }
-.day-tab:hover { color: var(--text); border-color: var(--border2); }
-.day-tab.active-vie { border-color: #3b82f6; color: #7dd3fc; background: #0a1220; }
-.day-tab.active-sab { border-color: #16a34a; color: #86efac; background: #0a1a10; }
-.day-tab.active-dom { border-color: #d97706; color: #fcd34d; background: #1a1205; }
+/* Day tabs */
+.day-tabs { display: flex; gap: 0; margin-bottom: 16px; border-bottom: 1px solid var(--border); }
+.day-tab { padding: 8px 20px; font-size: 12px; font-weight: 500; cursor: pointer; border: none; background: none; color: var(--text3); border-bottom: 2px solid transparent; transition: all 0.15s; position: relative; top: 1px; letter-spacing: 0.02em; }
+.day-tab:hover { color: var(--text2); }
+.day-tab.active-vie { color: #1d4ed8; border-bottom-color: #1d4ed8; }
+.day-tab.active-sab { color: #15803d; border-bottom-color: #15803d; }
+.day-tab.active-dom { color: #b45309; border-bottom-color: #b45309; }
 
 /* Legend */
 .legend { display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap; }
-.leg { display: flex; align-items: center; gap: 5px; font-size: 10px; color: var(--text3); font-family: var(--mono); }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); }
 .leg-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
 
 /* Scrollbar */
@@ -146,13 +150,11 @@ tr.total-row td { background: var(--bg3); font-family: var(--mono); font-weight:
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
 
-/* Responsive */
 @media (max-width: 900px) {
   .two-col { grid-template-columns: 1fr; }
   .desp-grid { grid-template-columns: repeat(2, 1fr); }
   .metrics { grid-template-columns: repeat(2, 1fr); }
-  .tabs { gap: 0; }
-  .tab { padding: 5px 10px; font-size: 10px; }
+  .tab { padding: 0 12px; font-size: 10px; }
 }
 </style>
 </head>
@@ -160,7 +162,7 @@ tr.total-row td { background: var(--bg3); font-family: var(--mono); font-weight:
 <div class="app">
 
 <header class="topbar">
-  <div class="logo">DDM<span>/</span>2026</div>
+  <div class="logo"><strong>· FACTORY NINE ·</strong><span>Despacho DDM 2026</span></div>
   <div class="topbar-center">
     <div class="tabs">
       <button class="tab active" onclick="switchTab('despacho')">Despacho</button>
@@ -274,7 +276,7 @@ const TIENDA_HDR={'Chicureo Costos':'Chicureo','La Florida Costos':'La Florida',
 
 const LISTA=[{T:"A",P:1,ID:23044,N:"SALSA DE MARACUYA (PA)"},{T:"A",P:2,ID:23043,N:"SALSA DE BERRIES (PA)"},{T:"A",P:6,ID:22117,N:"DEC TROZ BARRA OREO MIX (PA)"},{T:"A",P:7,ID:22064,N:"DEC TROZ TOR RED VELVET (PA)"},{T:"A",P:8,ID:22058,N:"DEC TROZ TOR DARK CAKE (PA)"},{T:"A",P:9,ID:22110,N:"DEC TROZ PIE DE NUTELLA (PA)"},{T:"A",P:10,ID:22039,N:"DEC TROZ PIE LEMON (PA)"},{T:"A",P:11,ID:22037,N:"DEC TROZ PIE APPLE CRUMBLE (PA)"},{T:"A",P:12,ID:22129,N:"DEC TROZ CH VOLCANO"},{T:"A",P:13,ID:22008,N:"DEC TROZ CH OREO (PA)"},{T:"A",P:14,ID:22016,N:"DEC TROZ CH NY NEUTRO (PA)"},{T:"A",P:16,ID:22065,N:"DEC MED TOR RED VELVET (PA)"},{T:"A",P:17,ID:22059,N:"DEC MED TOR DARK CAKE (PA)"},{T:"A",P:18,ID:22109,N:"DEC MED PIE DE NUTELLA (PA)"},{T:"A",P:19,ID:22124,N:"DEC MED CH VOLCANO (PA)"},{T:"A",P:20,ID:22009,N:"DEC MED CH OREO (PA)"},{T:"A",P:22,ID:22063,N:"DEC GRD TOR RED VELVET (PA)"},{T:"A",P:23,ID:22057,N:"DEC GRD TOR DARK CAKE (PA)"},{T:"A",P:24,ID:22108,N:"DEC GRD PIE NUTELLA (PA)"},{T:"A",P:25,ID:22038,N:"DEC GRD PIE LEMON (PA)"},{T:"A",P:26,ID:22036,N:"DEC GRD PIE APPLE CRUMBLE (PA)"},{T:"A",P:27,ID:22123,N:"DEC GRD CH VOLCANO (PA)"},{T:"A",P:28,ID:22007,N:"DEC GRD CH OREO (PA)"},{T:"B",P:1,ID:22002,N:"DEC TROZ BARRA PEANUT BUTTER (PA)"},{T:"B",P:2,ID:22086,N:"DEC TROZ TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:3,ID:22053,N:"DEC TROZ TOR CARROT CAKE (PA)"},{T:"B",P:4,ID:22050,N:"DEC TROZ TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:5,ID:22081,N:"DEC TROZ S/A TOR CARROT CAKE (PA)"},{T:"B",P:6,ID:22092,N:"DEC TROZ CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:7,ID:22139,N:"DEC TROZ CH MANJAR SA"},{T:"B",P:8,ID:22147,N:"DEC TROZ PIE BLONDIE BERRIES"},{T:"B",P:9,ID:22152,N:"DEC TROZ TOR CHOCOLATE SA"},{T:"B",P:10,ID:22088,N:"DEC MED TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:11,ID:22054,N:"DEC MED TOR CARROT CAKE (PA)"},{T:"B",P:12,ID:22051,N:"DEC MED TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:13,ID:22080,N:"DEC MED S/A TOR CARROT CAKE (PA)"},{T:"B",P:14,ID:22094,N:"DEC MED CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:15,ID:22138,N:"DEC MED CH MANJAR SA"},{T:"B",P:16,ID:22146,N:"DEC MED PIE BLONDIE BERRIES"},{T:"B",P:17,ID:22151,N:"DEC MED TOR CHOCOLATE SA"},{T:"B",P:18,ID:22087,N:"DEC GRD TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:19,ID:22052,N:"DEC GRD TOR CARROT CAKE (PA)"},{T:"B",P:20,ID:22049,N:"DEC GRD TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:21,ID:22082,N:"DEC GRD S/A TOR CARROT CAKE (PA)"},{T:"B",P:22,ID:22093,N:"DEC GRD CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:23,ID:22137,N:"DEC GRD CH MANJAR SA"},{T:"B",P:24,ID:22145,N:"DEC GRD PIE BLONDIE BERRIES"},{T:"B",P:25,ID:22150,N:"DEC GRD TOR CHOCOLATE SA"},{T:"C",P:2,ID:22031,N:"DEC COOKIE AVENA CRANBERRY"},{T:"C",P:3,ID:22033,N:"DEC COOKIE CHOCOLATE CHIP WALNUT (PA)"},{T:"C",P:4,ID:22034,N:"DEC COOKIE TRIPLE CHOCOLATE (PA)"},{T:"C",P:5,ID:22153,N:"DEC COOKIE KINDER"},{T:"C",P:6,ID:22003,N:"DEC TROZ BROWNIE TRADICIONAL (PA)"},{T:"C",P:7,ID:22001,N:"DEC TROZ BROWNIE DULCE DE LECHE (PA)"},{T:"C",P:8,ID:22125,N:"DEC TROZ LEMONIE (PA)"},{T:"C",P:9,ID:22044,N:"DEC TROZ QUEQUE CHOCOLATE (PA)"},{T:"C",P:10,ID:22083,N:"DEC TROZ QUEQUE S/A ZANAHORIA (PA)"},{T:"C",P:11,ID:22045,N:"DEC TROZ QUEQUE ZANAHORIA (PA)"},{T:"C",P:12,ID:22143,N:"DEC TROZ QUEQUE PLATANO (PA)"},{T:"C",P:13,ID:22072,N:"DEC ENT QUEQUE CHOCOLATE (PA)"},{T:"C",P:14,ID:22084,N:"DEC ENT QUEQUE S/A ZANAHORIA (PA)"},{T:"C",P:15,ID:22073,N:"DEC ENT QUEQUE ZANAHORIA (PA)"},{T:"C",P:16,ID:22142,N:"DEC ENT QUEQUE PLATANO (PA)"},{T:"C",P:17,ID:22149,N:"DEC TROZ BROWNIE RETAIL"}];
 
-const DDM={22064:600,22086:600,22058:850,22152:500,22053:1200,22050:800,22081:500,22045:194,22083:244,22143:154,22044:186,22039:800,22110:800,22147:279,22037:605,22125:500,22092:650,22129:350,22008:900,22016:950,22003:812,22001:600,22002:138,22117:126,22065:210,22088:240,22059:284,22151:155,22054:500,22051:189,22080:180,22109:134,22146:75,22094:188,22124:100,22009:170,22063:78,22087:78,22057:78,22150:78,22052:130,22049:78,22082:78,22145:78,22093:78,22038:90,22036:90,22123:78,22007:78,22073:50,22084:82,22142:40,22072:50,22034:500,22033:400,22031:400};
+const DDM={22064:600,22086:600,22058:850,22152:500,22053:1200,22050:800,22081:500,22045:194,22083:244,22143:154,22044:186,22039:800,22110:800,22147:279,22037:605,22125:500,22092:650,22129:350,22008:900,22016:950,22003:812,22001:600,22002:138,22117:126,22065:210,22088:240,22059:284,22151:155,22054:500,22051:189,22080:180,22109:134,22146:75,22094:188,22124:100,22009:170,22063:78,22087:78,22057:78,22150:78,22052:130,22049:78,22082:78,22145:78,22093:78,22038:90,22036:90,22123:78,22007:78,22108:78,22073:50,22084:82,22142:40,22072:50,22034:500,22033:400,22031:400,22139:0,22138:0,22137:0,22153:0,22149:0};
 
 const SH={"Trozo Ch Oreo":{"Chicureo":0.0328,"La Florida":0.0738,"La Reina":0.041,"Lastarria":0.123,"Los Militares":0.0984,"Luis Pasteur":0.0328,"Maipu":0.0492,"Nunoa":0.1393,"Penalolen":0.041,"Pocuro":0.0738,"Providencia":0.1066,"San Miguel":0.0902,"Tabancura":0.0738},"Trozo Ch NY Berries":{"Chicureo":0.0293,"La Florida":0.0684,"La Reina":0.0391,"Lastarria":0.127,"Los Militares":0.1172,"Luis Pasteur":0.0293,"Maipu":0.0586,"Nunoa":0.1563,"Penalolen":0.0391,"Pocuro":0.0781,"Providencia":0.1465,"San Miguel":0.0879,"Tabancura":0.0586},"Trozo Ch White Raspberry":{"Chicureo":0.0556,"La Florida":0.0741,"La Reina":0.0741,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0741,"Nunoa":0.1481,"Penalolen":0.037,"Pocuro":0.0741,"Providencia":0.1111,"San Miguel":0.0741,"Tabancura":0.0926},"Trozo Ch NY Maracuya":{"Chicureo":0.05,"La Florida":0.05,"La Reina":0.1,"Lastarria":0.15,"Los Militares":0.1,"Luis Pasteur":0.05,"Maipu":0.05,"Nunoa":0.1,"Penalolen":0.05,"Pocuro":0.1,"Providencia":0.1,"San Miguel":0.05,"Tabancura":0.05},"Trozo Ch Volcano":{"Chicureo":0.0556,"La Florida":0.0741,"La Reina":0.0,"Lastarria":0.0741,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.1481,"Nunoa":0.1667,"Penalolen":0.0,"Pocuro":0.0926,"Providencia":0.1111,"San Miguel":0.0741,"Tabancura":0.037},"Trozo Lemon Pie":{"Chicureo":0.0538,"La Florida":0.0968,"La Reina":0.0538,"Lastarria":0.1075,"Los Militares":0.1183,"Luis Pasteur":0.0538,"Maipu":0.0538,"Nunoa":0.1075,"Penalolen":0.0538,"Pocuro":0.0538,"Providencia":0.1183,"San Miguel":0.0645,"Tabancura":0.0645},"Trozo Nutella Pie":{"Chicureo":0.0469,"La Florida":0.0625,"La Reina":0.0469,"Lastarria":0.125,"Los Militares":0.1406,"Luis Pasteur":0.0625,"Maipu":0.0625,"Nunoa":0.1406,"Penalolen":0.0469,"Pocuro":0.0469,"Providencia":0.1563,"San Miguel":0.0469,"Tabancura":0.0469},"Trozo Apple Pie":{"Chicureo":0.0435,"La Florida":0.0725,"La Reina":0.0435,"Lastarria":0.1449,"Los Militares":0.1739,"Luis Pasteur":0.0435,"Maipu":0.0435,"Nunoa":0.1449,"Penalolen":0.0435,"Pocuro":0.0435,"Providencia":0.1594,"San Miguel":0.0725,"Tabancura":0.0435},"Trozo Tor Carrot Cake":{"Chicureo":0.0343,"La Florida":0.0539,"La Reina":0.0392,"Lastarria":0.1373,"Los Militares":0.1618,"Luis Pasteur":0.0245,"Maipu":0.0441,"Nunoa":0.1961,"Penalolen":0.049,"Pocuro":0.0343,"Providencia":0.1275,"San Miguel":0.0637,"Tabancura":0.0343},"Trozo Tor Dark Cake":{"Chicureo":0.0488,"La Florida":0.0634,"La Reina":0.0366,"Lastarria":0.1073,"Los Militares":0.0976,"Luis Pasteur":0.0244,"Maipu":0.0488,"Nunoa":0.122,"Penalolen":0.0366,"Pocuro":0.0488,"Providencia":0.122,"San Miguel":0.0976,"Tabancura":0.0732},"Trozo Tor Brownie Man y Framb":{"Chicureo":0.0364,"La Florida":0.0545,"La Reina":0.0455,"Lastarria":0.1273,"Los Militares":0.1364,"Luis Pasteur":0.0273,"Maipu":0.0455,"Nunoa":0.1727,"Penalolen":0.0364,"Pocuro":0.0545,"Providencia":0.1273,"San Miguel":0.0727,"Tabancura":0.0364},"Trozo Tor Red Velvet":{"Chicureo":0.0351,"La Florida":0.0702,"La Reina":0.0351,"Lastarria":0.1404,"Los Militares":0.1228,"Luis Pasteur":0.0351,"Maipu":0.0526,"Nunoa":0.1754,"Penalolen":0.0351,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0702,"Tabancura":0.0526},"Trozo Tor Lemon Blueberry Cake":{"Chicureo":0.0345,"La Florida":0.069,"La Reina":0.0517,"Lastarria":0.1207,"Los Militares":0.1552,"Luis Pasteur":0.0345,"Maipu":0.069,"Nunoa":0.1724,"Penalolen":0.0345,"Pocuro":0.0345,"Providencia":0.1379,"San Miguel":0.0517,"Tabancura":0.0345},"Trozo Tor S/A Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Trozo Tor S/A Chocolate":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Mediano Ch White Raspberry":{"Chicureo":0.0588,"La Florida":0.0784,"La Reina":0.0784,"Lastarria":0.0784,"Los Militares":0.0784,"Luis Pasteur":0.0588,"Maipu":0.0784,"Nunoa":0.1569,"Penalolen":0.0784,"Pocuro":0.0588,"Providencia":0.1373,"San Miguel":0.0784,"Tabancura":0.0784},"Mediano Ch Oreo":{"Chicureo":0.0417,"La Florida":0.0694,"La Reina":0.0556,"Lastarria":0.0972,"Los Militares":0.0972,"Luis Pasteur":0.0556,"Maipu":0.0694,"Nunoa":0.1528,"Penalolen":0.0556,"Pocuro":0.0694,"Providencia":0.1389,"San Miguel":0.0694,"Tabancura":0.0694},"Mediano Ch Volcano":{"Chicureo":0.0556,"La Florida":0.0556,"La Reina":0.0556,"Lastarria":0.0556,"Los Militares":0.0556,"Luis Pasteur":0.0556,"Maipu":0.0556,"Nunoa":0.1667,"Penalolen":0.0556,"Pocuro":0.0556,"Providencia":0.1111,"San Miguel":0.1111,"Tabancura":0.1111},"Mediano Nutella Pie":{"Chicureo":0.0526,"La Florida":0.0702,"La Reina":0.0526,"Lastarria":0.1053,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0702,"Nunoa":0.1404,"Penalolen":0.0702,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0526,"Tabancura":0.0351},"Mediana Tor Carrot Cake":{"Chicureo":0.0303,"La Florida":0.0606,"La Reina":0.0303,"Lastarria":0.1212,"Los Militares":0.1515,"Luis Pasteur":0.0303,"Maipu":0.0606,"Nunoa":0.2121,"Penalolen":0.0303,"Pocuro":0.0303,"Providencia":0.1515,"San Miguel":0.0606,"Tabancura":0.0303},"Mediana Tor Dark Cake":{"Chicureo":0.0426,"La Florida":0.0638,"La Reina":0.0426,"Lastarria":0.1064,"Los Militares":0.1064,"Luis Pasteur":0.0213,"Maipu":0.0638,"Nunoa":0.1702,"Penalolen":0.0426,"Pocuro":0.0426,"Providencia":0.1489,"San Miguel":0.0638,"Tabancura":0.0638},"Mediana Tor Lemon Blueberry Cake":{"Chicureo":0.0526,"La Florida":0.0702,"La Reina":0.0526,"Lastarria":0.1228,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0702,"Nunoa":0.1404,"Penalolen":0.0526,"Pocuro":0.0351,"Providencia":0.1228,"San Miguel":0.0526,"Tabancura":0.0526},"Mediana Tor Red Velvet":{"Chicureo":0.0476,"La Florida":0.0714,"La Reina":0.0476,"Lastarria":0.0952,"Los Militares":0.1429,"Luis Pasteur":0.0476,"Maipu":0.0714,"Nunoa":0.1667,"Penalolen":0.0476,"Pocuro":0.0476,"Providencia":0.1429,"San Miguel":0.0714,"Tabancura":0.0476},"Mediana Tor Brownie Man y Framb":{"Chicureo":0.0351,"La Florida":0.0526,"La Reina":0.0526,"Lastarria":0.1228,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0526,"Nunoa":0.1754,"Penalolen":0.0526,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0526,"Tabancura":0.0526},"Mediana Tor S/A Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Mediana Tor S/A Chocolate":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch Oreo":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch Volcano":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch White Raspberry":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch NY Berries":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Pie Lemon":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Pie Apple Crumble":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Nutella Pie":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Dark Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Lemon Blueberry Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Red Velvet":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Brownie Man y Framb":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor S/A Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor S/A Chocolate":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Peanut Butter Bar":{"Chicureo":0.0556,"La Florida":0.0694,"La Reina":0.0694,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0694,"Nunoa":0.1389,"Penalolen":0.0556,"Pocuro":0.0694,"Providencia":0.1111,"San Miguel":0.0833,"Tabancura":0.0694},"Oreo Mix Bar":{"Chicureo":0.0556,"La Florida":0.0694,"La Reina":0.0694,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0694,"Nunoa":0.1389,"Penalolen":0.0556,"Pocuro":0.0694,"Providencia":0.1111,"San Miguel":0.0833,"Tabancura":0.0694},"Brownie Húmedo Tradicional":{"Chicureo":0.0338,"La Florida":0.0563,"La Reina":0.0338,"Lastarria":0.1013,"Los Militares":0.1126,"Luis Pasteur":0.0338,"Maipu":0.0563,"Nunoa":0.2026,"Penalolen":0.0338,"Pocuro":0.0563,"Providencia":0.1464,"San Miguel":0.0788,"Tabancura":0.0563},"Brownie con Dulce Leche":{"Chicureo":0.0312,"La Florida":0.0625,"La Reina":0.0469,"Lastarria":0.1094,"Los Militares":0.1094,"Luis Pasteur":0.0469,"Maipu":0.0625,"Nunoa":0.1875,"Penalolen":0.0469,"Pocuro":0.0625,"Providencia":0.125,"San Miguel":0.0781,"Tabancura":0.0469},"Lemonie":{"Chicureo":0.0351,"La Florida":0.0702,"La Reina":0.0526,"Lastarria":0.1228,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0702,"Nunoa":0.1754,"Penalolen":0.0351,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0702,"Tabancura":0.0351},"Cookie Triple Chocolate":{"Chicureo":0.0338,"La Florida":0.0563,"La Reina":0.0563,"Lastarria":0.1125,"Los Militares":0.1125,"Luis Pasteur":0.0563,"Maipu":0.0563,"Nunoa":0.1688,"Penalolen":0.0563,"Pocuro":0.0563,"Providencia":0.1125,"San Miguel":0.0788,"Tabancura":0.0563},"Cookie Chocolate Chip Walnut":{"Chicureo":0.0338,"La Florida":0.0563,"La Reina":0.0338,"Lastarria":0.1125,"Los Militares":0.1125,"Luis Pasteur":0.0338,"Maipu":0.0563,"Nunoa":0.1688,"Penalolen":0.0563,"Pocuro":0.0563,"Providencia":0.1125,"San Miguel":0.0788,"Tabancura":0.0563},"Cookie Avena Cranberry":{"Chicureo":0.0325,"La Florida":0.0813,"La Reina":0.0488,"Lastarria":0.1138,"Los Militares":0.1138,"Luis Pasteur":0.0325,"Maipu":0.0488,"Nunoa":0.1788,"Penalolen":0.0488,"Pocuro":0.065,"Providencia":0.1138,"San Miguel":0.065,"Tabancura":0.0325},"Ent Queque S/A Zanahoria":{"Chicureo":0.0455,"La Florida":0.0909,"La Reina":0.0455,"Lastarria":0.0909,"Los Militares":0.0909,"Luis Pasteur":0.0455,"Maipu":0.0909,"Nunoa":0.1364,"Penalolen":0.1364,"Pocuro":0.0909,"Providencia":0.0909,"San Miguel":0.1364,"Tabancura":0.0455},"Ent Queque Chocolate":{"Chicureo":0.0556,"La Florida":0.0556,"La Reina":0.0556,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.1111,"Nunoa":0.1111,"Penalolen":0.0556,"Pocuro":0.0556,"Providencia":0.1111,"San Miguel":0.1111,"Tabancura":0.0556},"Ent Queque Zanahoria":{"Chicureo":0.0556,"La Florida":0.0556,"La Reina":0.0556,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0556,"Nunoa":0.1667,"Penalolen":0.0556,"Pocuro":0.0556,"Providencia":0.1111,"San Miguel":0.1111,"Tabancura":0.0556},"Ent Queque Plátano":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Troz Queque S/A Zanahoria":{"Chicureo":0.0366,"La Florida":0.0854,"La Reina":0.0488,"Lastarria":0.0854,"Los Militares":0.1098,"Luis Pasteur":0.0366,"Maipu":0.0854,"Nunoa":0.1463,"Penalolen":0.1098,"Pocuro":0.0488,"Providencia":0.0854,"San Miguel":0.1098,"Tabancura":0.0366},"Troz Queque Zanahoria":{"Chicureo":0.0357,"La Florida":0.0714,"La Reina":0.0357,"Lastarria":0.1429,"Los Militares":0.1071,"Luis Pasteur":0.0357,"Maipu":0.0714,"Nunoa":0.1786,"Penalolen":0.0714,"Pocuro":0.0357,"Providencia":0.1429,"San Miguel":0.0714,"Tabancura":0.0357},"Troz Queque Chocolate":{"Chicureo":0.0513,"La Florida":0.0769,"La Reina":0.0513,"Lastarria":0.1026,"Los Militares":0.1026,"Luis Pasteur":0.0513,"Maipu":0.0769,"Nunoa":0.1538,"Penalolen":0.1026,"Pocuro":0.0513,"Providencia":0.1026,"San Miguel":0.0769,"Tabancura":0.0513},"Troz Queque Plátano":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769}};
 
@@ -395,9 +397,9 @@ function renderDespacho(){
 function renderEstProducto(){
   let html=`<table><thead><tr>
     <th class="sml">Tipo</th><th class="sml">Pos</th><th style="width:68px">Art. #</th><th class="lft">Artículo</th>
-    <th style="color:#7dd3fc">Viernes<br><span style="font-size:9px;font-weight:400">30%</span></th>
-    <th style="color:#86efac">Sábado<br><span style="font-size:9px;font-weight:400">50%</span></th>
-    <th style="color:#fcd34d">Domingo<br><span style="font-size:9px;font-weight:400">20%</span></th>
+    <th style="color:#1d4ed8">Viernes<br><span style="font-size:9px;font-weight:400">30%</span></th>
+    <th style="color:#15803d">Sábado<br><span style="font-size:9px;font-weight:400">50%</span></th>
+    <th style="color:#b45309">Domingo<br><span style="font-size:9px;font-weight:400">20%</span></th>
     <th>Total DDM</th>
   </tr></thead><tbody>`;
   let lastTipo='';
@@ -435,7 +437,7 @@ function switchEstDay(day){
 }
 
 function renderEstTienda(day){
-  const dayColors={vie:'#7dd3fc',sab:'#86efac',dom:'#fcd34d'};
+  const dayColors={vie:'#1d4ed8',sab:'#15803d',dom:'#b45309'};
   const col=dayColors[day];
   let html=`<table><thead><tr>
     <th class="sml">Tipo</th><th class="sml">Pos</th><th style="width:68px">Art. #</th><th class="lft">Artículo</th>`;
