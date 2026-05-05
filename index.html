@@ -274,22 +274,137 @@ const COVERAGE={vie_AM:{vie:1.0,sab:0.80},vie_PM:{vie:1.0,sab:1.0,dom:0.30},sab_
 const DESP_LABELS={vie_AM:'Viernes AM',vie_PM:'Viernes PM',sab_AM:'Sábado AM',sab_PM:'Sábado PM',dom_AM:'Domingo AM',dom_PM:'Domingo PM'};
 const TIENDA_HDR={'Chicureo Costos':'Chicureo','La Florida Costos':'La Florida','La Reina Costo':'La Reina','Lastarria Costo':'Lastarria','Los Militares Costo':'Los Militares','Luis Pasteur Costos':'Luis Pasteur','Maipu Costos':'Maipu','Nunoa Costos':'Nunoa','Penalolen Costo':'Penalolen','Pocuro Costo':'Pocuro','Providencia Costos':'Providencia','San Miguel Costo':'San Miguel','Tabancura Costo':'Tabancura'};
 
-const LISTA=[{T:"A",P:1,ID:23044,N:"SALSA DE MARACUYA (PA)"},{T:"A",P:2,ID:23043,N:"SALSA DE BERRIES (PA)"},{T:"A",P:6,ID:22117,N:"DEC TROZ BARRA OREO MIX (PA)"},{T:"A",P:7,ID:22064,N:"DEC TROZ TOR RED VELVET (PA)"},{T:"A",P:8,ID:22058,N:"DEC TROZ TOR DARK CAKE (PA)"},{T:"A",P:9,ID:22110,N:"DEC TROZ PIE DE NUTELLA (PA)"},{T:"A",P:10,ID:22039,N:"DEC TROZ PIE LEMON (PA)"},{T:"A",P:11,ID:22037,N:"DEC TROZ PIE APPLE CRUMBLE (PA)"},{T:"A",P:12,ID:22129,N:"DEC TROZ CH VOLCANO"},{T:"A",P:13,ID:22008,N:"DEC TROZ CH OREO (PA)"},{T:"A",P:14,ID:22016,N:"DEC TROZ CH NY NEUTRO (PA)"},{T:"A",P:16,ID:22065,N:"DEC MED TOR RED VELVET (PA)"},{T:"A",P:17,ID:22059,N:"DEC MED TOR DARK CAKE (PA)"},{T:"A",P:18,ID:22109,N:"DEC MED PIE DE NUTELLA (PA)"},{T:"A",P:19,ID:22124,N:"DEC MED CH VOLCANO (PA)"},{T:"A",P:20,ID:22009,N:"DEC MED CH OREO (PA)"},{T:"A",P:22,ID:22063,N:"DEC GRD TOR RED VELVET (PA)"},{T:"A",P:23,ID:22057,N:"DEC GRD TOR DARK CAKE (PA)"},{T:"A",P:24,ID:22108,N:"DEC GRD PIE NUTELLA (PA)"},{T:"A",P:25,ID:22038,N:"DEC GRD PIE LEMON (PA)"},{T:"A",P:26,ID:22036,N:"DEC GRD PIE APPLE CRUMBLE (PA)"},{T:"A",P:27,ID:22123,N:"DEC GRD CH VOLCANO (PA)"},{T:"A",P:28,ID:22007,N:"DEC GRD CH OREO (PA)"},{T:"B",P:1,ID:22002,N:"DEC TROZ BARRA PEANUT BUTTER (PA)"},{T:"B",P:2,ID:22086,N:"DEC TROZ TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:3,ID:22053,N:"DEC TROZ TOR CARROT CAKE (PA)"},{T:"B",P:4,ID:22050,N:"DEC TROZ TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:5,ID:22081,N:"DEC TROZ S/A TOR CARROT CAKE (PA)"},{T:"B",P:6,ID:22092,N:"DEC TROZ CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:7,ID:22139,N:"DEC TROZ CH MANJAR SA"},{T:"B",P:8,ID:22147,N:"DEC TROZ PIE BLONDIE BERRIES"},{T:"B",P:9,ID:22152,N:"DEC TROZ TOR CHOCOLATE SA"},{T:"B",P:10,ID:22088,N:"DEC MED TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:11,ID:22054,N:"DEC MED TOR CARROT CAKE (PA)"},{T:"B",P:12,ID:22051,N:"DEC MED TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:13,ID:22080,N:"DEC MED S/A TOR CARROT CAKE (PA)"},{T:"B",P:14,ID:22094,N:"DEC MED CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:15,ID:22138,N:"DEC MED CH MANJAR SA"},{T:"B",P:16,ID:22146,N:"DEC MED PIE BLONDIE BERRIES"},{T:"B",P:17,ID:22151,N:"DEC MED TOR CHOCOLATE SA"},{T:"B",P:18,ID:22087,N:"DEC GRD TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:19,ID:22052,N:"DEC GRD TOR CARROT CAKE (PA)"},{T:"B",P:20,ID:22049,N:"DEC GRD TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:21,ID:22082,N:"DEC GRD S/A TOR CARROT CAKE (PA)"},{T:"B",P:22,ID:22093,N:"DEC GRD CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:23,ID:22137,N:"DEC GRD CH MANJAR SA"},{T:"B",P:24,ID:22145,N:"DEC GRD PIE BLONDIE BERRIES"},{T:"B",P:25,ID:22150,N:"DEC GRD TOR CHOCOLATE SA"},{T:"C",P:2,ID:22031,N:"DEC COOKIE AVENA CRANBERRY"},{T:"C",P:3,ID:22033,N:"DEC COOKIE CHOCOLATE CHIP WALNUT (PA)"},{T:"C",P:4,ID:22034,N:"DEC COOKIE TRIPLE CHOCOLATE (PA)"},{T:"C",P:5,ID:22153,N:"DEC COOKIE KINDER"},{T:"C",P:6,ID:22003,N:"DEC TROZ BROWNIE TRADICIONAL (PA)"},{T:"C",P:7,ID:22001,N:"DEC TROZ BROWNIE DULCE DE LECHE (PA)"},{T:"C",P:8,ID:22125,N:"DEC TROZ LEMONIE (PA)"},{T:"C",P:9,ID:22044,N:"DEC TROZ QUEQUE CHOCOLATE (PA)"},{T:"C",P:10,ID:22083,N:"DEC TROZ QUEQUE S/A ZANAHORIA (PA)"},{T:"C",P:11,ID:22045,N:"DEC TROZ QUEQUE ZANAHORIA (PA)"},{T:"C",P:12,ID:22143,N:"DEC TROZ QUEQUE PLATANO (PA)"},{T:"C",P:13,ID:22072,N:"DEC ENT QUEQUE CHOCOLATE (PA)"},{T:"C",P:14,ID:22084,N:"DEC ENT QUEQUE S/A ZANAHORIA (PA)"},{T:"C",P:15,ID:22073,N:"DEC ENT QUEQUE ZANAHORIA (PA)"},{T:"C",P:16,ID:22142,N:"DEC ENT QUEQUE PLATANO (PA)"},{T:"C",P:17,ID:22149,N:"DEC TROZ BROWNIE RETAIL"}];
+const LISTA=[{T:"A",P:6,ID:22117,N:"DEC TROZ BARRA OREO MIX (PA)"},{T:"A",P:7,ID:22064,N:"DEC TROZ TOR RED VELVET (PA)"},{T:"A",P:8,ID:22058,N:"DEC TROZ TOR DARK CAKE (PA)"},{T:"A",P:9,ID:22110,N:"DEC TROZ PIE DE NUTELLA (PA)"},{T:"A",P:10,ID:22039,N:"DEC TROZ PIE LEMON (PA)"},{T:"A",P:11,ID:22037,N:"DEC TROZ PIE APPLE CRUMBLE (PA)"},{T:"A",P:12,ID:22129,N:"DEC TROZ CH VOLCANO"},{T:"A",P:13,ID:22008,N:"DEC TROZ CH OREO (PA)"},{T:"A",P:14,ID:22016,N:"DEC TROZ CH NY NEUTRO (PA)"},{T:"A",P:16,ID:22065,N:"DEC MED TOR RED VELVET (PA)"},{T:"A",P:17,ID:22059,N:"DEC MED TOR DARK CAKE (PA)"},{T:"A",P:18,ID:22109,N:"DEC MED PIE DE NUTELLA (PA)"},{T:"A",P:19,ID:22124,N:"DEC MED CH VOLCANO (PA)"},{T:"A",P:20,ID:22009,N:"DEC MED CH OREO (PA)"},{T:"A",P:22,ID:22063,N:"DEC GRD TOR RED VELVET (PA)"},{T:"A",P:23,ID:22057,N:"DEC GRD TOR DARK CAKE (PA)"},{T:"A",P:24,ID:22108,N:"DEC GRD PIE NUTELLA (PA)"},{T:"A",P:25,ID:22038,N:"DEC GRD PIE LEMON (PA)"},{T:"A",P:26,ID:22036,N:"DEC GRD PIE APPLE CRUMBLE (PA)"},{T:"A",P:27,ID:22123,N:"DEC GRD CH VOLCANO (PA)"},{T:"A",P:28,ID:22007,N:"DEC GRD CH OREO (PA)"},{T:"B",P:1,ID:22002,N:"DEC TROZ BARRA PEANUT BUTTER (PA)"},{T:"B",P:2,ID:22086,N:"DEC TROZ TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:3,ID:22053,N:"DEC TROZ TOR CARROT CAKE (PA)"},{T:"B",P:4,ID:22050,N:"DEC TROZ TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:5,ID:22081,N:"DEC TROZ S/A TOR CARROT CAKE (PA)"},{T:"B",P:6,ID:22092,N:"DEC TROZ CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:7,ID:22139,N:"DEC TROZ CH MANJAR SA"},{T:"B",P:8,ID:22147,N:"DEC TROZ PIE BLONDIE BERRIES"},{T:"B",P:9,ID:22152,N:"DEC TROZ TOR CHOCOLATE SA"},{T:"B",P:10,ID:22088,N:"DEC MED TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:11,ID:22054,N:"DEC MED TOR CARROT CAKE (PA)"},{T:"B",P:12,ID:22051,N:"DEC MED TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:13,ID:22080,N:"DEC MED S/A TOR CARROT CAKE (PA)"},{T:"B",P:14,ID:22094,N:"DEC MED CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:15,ID:22138,N:"DEC MED CH MANJAR SA"},{T:"B",P:16,ID:22146,N:"DEC MED PIE BLONDIE BERRIES"},{T:"B",P:17,ID:22151,N:"DEC MED TOR CHOCOLATE SA"},{T:"B",P:18,ID:22087,N:"DEC GRD TOR LEMON BLUEBERRIES (PA)"},{T:"B",P:19,ID:22052,N:"DEC GRD TOR CARROT CAKE (PA)"},{T:"B",P:20,ID:22049,N:"DEC GRD TOR BROWNIE MANJAR BLANCO (PA)"},{T:"B",P:21,ID:22082,N:"DEC GRD S/A TOR CARROT CAKE (PA)"},{T:"B",P:22,ID:22093,N:"DEC GRD CH WHITE CHOCOLATE RASPBERRY (PA)"},{T:"B",P:23,ID:22137,N:"DEC GRD CH MANJAR SA"},{T:"B",P:24,ID:22145,N:"DEC GRD PIE BLONDIE BERRIES"},{T:"B",P:25,ID:22150,N:"DEC GRD TOR CHOCOLATE SA"},{T:"C",P:2,ID:22031,N:"DEC COOKIE AVENA CRANBERRY"},{T:"C",P:3,ID:22033,N:"DEC COOKIE CHOCOLATE CHIP WALNUT (PA)"},{T:"C",P:4,ID:22034,N:"DEC COOKIE TRIPLE CHOCOLATE (PA)"},{T:"C",P:5,ID:22153,N:"DEC COOKIE KINDER"},{T:"C",P:6,ID:22003,N:"DEC TROZ BROWNIE TRADICIONAL (PA)"},{T:"C",P:7,ID:22001,N:"DEC TROZ BROWNIE DULCE DE LECHE (PA)"},{T:"C",P:8,ID:22125,N:"DEC TROZ LEMONIE (PA)"},{T:"C",P:9,ID:22044,N:"DEC TROZ QUEQUE CHOCOLATE (PA)"},{T:"C",P:10,ID:22083,N:"DEC TROZ QUEQUE S/A ZANAHORIA (PA)"},{T:"C",P:11,ID:22045,N:"DEC TROZ QUEQUE ZANAHORIA (PA)"},{T:"C",P:12,ID:22143,N:"DEC TROZ QUEQUE PLATANO (PA)"},{T:"C",P:13,ID:22072,N:"DEC ENT QUEQUE CHOCOLATE (PA)"},{T:"C",P:14,ID:22084,N:"DEC ENT QUEQUE S/A ZANAHORIA (PA)"},{T:"C",P:15,ID:22073,N:"DEC ENT QUEQUE ZANAHORIA (PA)"},{T:"C",P:16,ID:22142,N:"DEC ENT QUEQUE PLATANO (PA)"},{T:"C",P:17,ID:22149,N:"DEC TROZ BROWNIE RETAIL"}];
 
 const DDM={22064:600,22086:600,22058:850,22152:500,22053:1200,22050:800,22081:500,22045:194,22083:244,22143:154,22044:186,22039:800,22110:800,22147:279,22037:605,22125:500,22092:650,22129:350,22008:900,22016:950,22003:812,22001:600,22002:138,22117:126,22065:210,22088:240,22059:284,22151:155,22054:500,22051:189,22080:180,22109:134,22146:75,22094:188,22124:100,22009:170,22063:78,22087:78,22057:78,22150:78,22052:130,22049:78,22082:78,22145:78,22093:78,22038:90,22036:90,22123:78,22007:78,22108:78,22073:50,22084:82,22142:40,22072:50,22034:500,22033:400,22031:400,22139:0,22138:0,22137:0,22153:0,22149:0};
 
 const SH={"Trozo Ch Oreo":{"Chicureo":0.0328,"La Florida":0.0738,"La Reina":0.041,"Lastarria":0.123,"Los Militares":0.0984,"Luis Pasteur":0.0328,"Maipu":0.0492,"Nunoa":0.1393,"Penalolen":0.041,"Pocuro":0.0738,"Providencia":0.1066,"San Miguel":0.0902,"Tabancura":0.0738},"Trozo Ch NY Berries":{"Chicureo":0.0293,"La Florida":0.0684,"La Reina":0.0391,"Lastarria":0.127,"Los Militares":0.1172,"Luis Pasteur":0.0293,"Maipu":0.0586,"Nunoa":0.1563,"Penalolen":0.0391,"Pocuro":0.0781,"Providencia":0.1465,"San Miguel":0.0879,"Tabancura":0.0586},"Trozo Ch White Raspberry":{"Chicureo":0.0556,"La Florida":0.0741,"La Reina":0.0741,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0741,"Nunoa":0.1481,"Penalolen":0.037,"Pocuro":0.0741,"Providencia":0.1111,"San Miguel":0.0741,"Tabancura":0.0926},"Trozo Ch NY Maracuya":{"Chicureo":0.05,"La Florida":0.05,"La Reina":0.1,"Lastarria":0.15,"Los Militares":0.1,"Luis Pasteur":0.05,"Maipu":0.05,"Nunoa":0.1,"Penalolen":0.05,"Pocuro":0.1,"Providencia":0.1,"San Miguel":0.05,"Tabancura":0.05},"Trozo Ch Volcano":{"Chicureo":0.0556,"La Florida":0.0741,"La Reina":0.0,"Lastarria":0.0741,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.1481,"Nunoa":0.1667,"Penalolen":0.0,"Pocuro":0.0926,"Providencia":0.1111,"San Miguel":0.0741,"Tabancura":0.037},"Trozo Lemon Pie":{"Chicureo":0.0538,"La Florida":0.0968,"La Reina":0.0538,"Lastarria":0.1075,"Los Militares":0.1183,"Luis Pasteur":0.0538,"Maipu":0.0538,"Nunoa":0.1075,"Penalolen":0.0538,"Pocuro":0.0538,"Providencia":0.1183,"San Miguel":0.0645,"Tabancura":0.0645},"Trozo Nutella Pie":{"Chicureo":0.0469,"La Florida":0.0625,"La Reina":0.0469,"Lastarria":0.125,"Los Militares":0.1406,"Luis Pasteur":0.0625,"Maipu":0.0625,"Nunoa":0.1406,"Penalolen":0.0469,"Pocuro":0.0469,"Providencia":0.1563,"San Miguel":0.0469,"Tabancura":0.0469},"Trozo Apple Pie":{"Chicureo":0.0435,"La Florida":0.0725,"La Reina":0.0435,"Lastarria":0.1449,"Los Militares":0.1739,"Luis Pasteur":0.0435,"Maipu":0.0435,"Nunoa":0.1449,"Penalolen":0.0435,"Pocuro":0.0435,"Providencia":0.1594,"San Miguel":0.0725,"Tabancura":0.0435},"Trozo Tor Carrot Cake":{"Chicureo":0.0343,"La Florida":0.0539,"La Reina":0.0392,"Lastarria":0.1373,"Los Militares":0.1618,"Luis Pasteur":0.0245,"Maipu":0.0441,"Nunoa":0.1961,"Penalolen":0.049,"Pocuro":0.0343,"Providencia":0.1275,"San Miguel":0.0637,"Tabancura":0.0343},"Trozo Tor Dark Cake":{"Chicureo":0.0488,"La Florida":0.0634,"La Reina":0.0366,"Lastarria":0.1073,"Los Militares":0.0976,"Luis Pasteur":0.0244,"Maipu":0.0488,"Nunoa":0.122,"Penalolen":0.0366,"Pocuro":0.0488,"Providencia":0.122,"San Miguel":0.0976,"Tabancura":0.0732},"Trozo Tor Brownie Man y Framb":{"Chicureo":0.0364,"La Florida":0.0545,"La Reina":0.0455,"Lastarria":0.1273,"Los Militares":0.1364,"Luis Pasteur":0.0273,"Maipu":0.0455,"Nunoa":0.1727,"Penalolen":0.0364,"Pocuro":0.0545,"Providencia":0.1273,"San Miguel":0.0727,"Tabancura":0.0364},"Trozo Tor Red Velvet":{"Chicureo":0.0351,"La Florida":0.0702,"La Reina":0.0351,"Lastarria":0.1404,"Los Militares":0.1228,"Luis Pasteur":0.0351,"Maipu":0.0526,"Nunoa":0.1754,"Penalolen":0.0351,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0702,"Tabancura":0.0526},"Trozo Tor Lemon Blueberry Cake":{"Chicureo":0.0345,"La Florida":0.069,"La Reina":0.0517,"Lastarria":0.1207,"Los Militares":0.1552,"Luis Pasteur":0.0345,"Maipu":0.069,"Nunoa":0.1724,"Penalolen":0.0345,"Pocuro":0.0345,"Providencia":0.1379,"San Miguel":0.0517,"Tabancura":0.0345},"Trozo Tor S/A Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Trozo Tor S/A Chocolate":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Mediano Ch White Raspberry":{"Chicureo":0.0588,"La Florida":0.0784,"La Reina":0.0784,"Lastarria":0.0784,"Los Militares":0.0784,"Luis Pasteur":0.0588,"Maipu":0.0784,"Nunoa":0.1569,"Penalolen":0.0784,"Pocuro":0.0588,"Providencia":0.1373,"San Miguel":0.0784,"Tabancura":0.0784},"Mediano Ch Oreo":{"Chicureo":0.0417,"La Florida":0.0694,"La Reina":0.0556,"Lastarria":0.0972,"Los Militares":0.0972,"Luis Pasteur":0.0556,"Maipu":0.0694,"Nunoa":0.1528,"Penalolen":0.0556,"Pocuro":0.0694,"Providencia":0.1389,"San Miguel":0.0694,"Tabancura":0.0694},"Mediano Ch Volcano":{"Chicureo":0.0556,"La Florida":0.0556,"La Reina":0.0556,"Lastarria":0.0556,"Los Militares":0.0556,"Luis Pasteur":0.0556,"Maipu":0.0556,"Nunoa":0.1667,"Penalolen":0.0556,"Pocuro":0.0556,"Providencia":0.1111,"San Miguel":0.1111,"Tabancura":0.1111},"Mediano Nutella Pie":{"Chicureo":0.0526,"La Florida":0.0702,"La Reina":0.0526,"Lastarria":0.1053,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0702,"Nunoa":0.1404,"Penalolen":0.0702,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0526,"Tabancura":0.0351},"Mediana Tor Carrot Cake":{"Chicureo":0.0303,"La Florida":0.0606,"La Reina":0.0303,"Lastarria":0.1212,"Los Militares":0.1515,"Luis Pasteur":0.0303,"Maipu":0.0606,"Nunoa":0.2121,"Penalolen":0.0303,"Pocuro":0.0303,"Providencia":0.1515,"San Miguel":0.0606,"Tabancura":0.0303},"Mediana Tor Dark Cake":{"Chicureo":0.0426,"La Florida":0.0638,"La Reina":0.0426,"Lastarria":0.1064,"Los Militares":0.1064,"Luis Pasteur":0.0213,"Maipu":0.0638,"Nunoa":0.1702,"Penalolen":0.0426,"Pocuro":0.0426,"Providencia":0.1489,"San Miguel":0.0638,"Tabancura":0.0638},"Mediana Tor Lemon Blueberry Cake":{"Chicureo":0.0526,"La Florida":0.0702,"La Reina":0.0526,"Lastarria":0.1228,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0702,"Nunoa":0.1404,"Penalolen":0.0526,"Pocuro":0.0351,"Providencia":0.1228,"San Miguel":0.0526,"Tabancura":0.0526},"Mediana Tor Red Velvet":{"Chicureo":0.0476,"La Florida":0.0714,"La Reina":0.0476,"Lastarria":0.0952,"Los Militares":0.1429,"Luis Pasteur":0.0476,"Maipu":0.0714,"Nunoa":0.1667,"Penalolen":0.0476,"Pocuro":0.0476,"Providencia":0.1429,"San Miguel":0.0714,"Tabancura":0.0476},"Mediana Tor Brownie Man y Framb":{"Chicureo":0.0351,"La Florida":0.0526,"La Reina":0.0526,"Lastarria":0.1228,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0526,"Nunoa":0.1754,"Penalolen":0.0526,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0526,"Tabancura":0.0526},"Mediana Tor S/A Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Mediana Tor S/A Chocolate":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch Oreo":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch Volcano":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch White Raspberry":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Ch NY Berries":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Pie Lemon":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Pie Apple Crumble":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Nutella Pie":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Dark Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Lemon Blueberry Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Red Velvet":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor Brownie Man y Framb":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor S/A Carrot Cake":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Grande Tor S/A Chocolate":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Peanut Butter Bar":{"Chicureo":0.0556,"La Florida":0.0694,"La Reina":0.0694,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0694,"Nunoa":0.1389,"Penalolen":0.0556,"Pocuro":0.0694,"Providencia":0.1111,"San Miguel":0.0833,"Tabancura":0.0694},"Oreo Mix Bar":{"Chicureo":0.0556,"La Florida":0.0694,"La Reina":0.0694,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0694,"Nunoa":0.1389,"Penalolen":0.0556,"Pocuro":0.0694,"Providencia":0.1111,"San Miguel":0.0833,"Tabancura":0.0694},"Brownie Húmedo Tradicional":{"Chicureo":0.0338,"La Florida":0.0563,"La Reina":0.0338,"Lastarria":0.1013,"Los Militares":0.1126,"Luis Pasteur":0.0338,"Maipu":0.0563,"Nunoa":0.2026,"Penalolen":0.0338,"Pocuro":0.0563,"Providencia":0.1464,"San Miguel":0.0788,"Tabancura":0.0563},"Brownie con Dulce Leche":{"Chicureo":0.0312,"La Florida":0.0625,"La Reina":0.0469,"Lastarria":0.1094,"Los Militares":0.1094,"Luis Pasteur":0.0469,"Maipu":0.0625,"Nunoa":0.1875,"Penalolen":0.0469,"Pocuro":0.0625,"Providencia":0.125,"San Miguel":0.0781,"Tabancura":0.0469},"Lemonie":{"Chicureo":0.0351,"La Florida":0.0702,"La Reina":0.0526,"Lastarria":0.1228,"Los Militares":0.1228,"Luis Pasteur":0.0526,"Maipu":0.0702,"Nunoa":0.1754,"Penalolen":0.0351,"Pocuro":0.0526,"Providencia":0.1228,"San Miguel":0.0702,"Tabancura":0.0351},"Cookie Triple Chocolate":{"Chicureo":0.0338,"La Florida":0.0563,"La Reina":0.0563,"Lastarria":0.1125,"Los Militares":0.1125,"Luis Pasteur":0.0563,"Maipu":0.0563,"Nunoa":0.1688,"Penalolen":0.0563,"Pocuro":0.0563,"Providencia":0.1125,"San Miguel":0.0788,"Tabancura":0.0563},"Cookie Chocolate Chip Walnut":{"Chicureo":0.0338,"La Florida":0.0563,"La Reina":0.0338,"Lastarria":0.1125,"Los Militares":0.1125,"Luis Pasteur":0.0338,"Maipu":0.0563,"Nunoa":0.1688,"Penalolen":0.0563,"Pocuro":0.0563,"Providencia":0.1125,"San Miguel":0.0788,"Tabancura":0.0563},"Cookie Avena Cranberry":{"Chicureo":0.0325,"La Florida":0.0813,"La Reina":0.0488,"Lastarria":0.1138,"Los Militares":0.1138,"Luis Pasteur":0.0325,"Maipu":0.0488,"Nunoa":0.1788,"Penalolen":0.0488,"Pocuro":0.065,"Providencia":0.1138,"San Miguel":0.065,"Tabancura":0.0325},"Ent Queque S/A Zanahoria":{"Chicureo":0.0455,"La Florida":0.0909,"La Reina":0.0455,"Lastarria":0.0909,"Los Militares":0.0909,"Luis Pasteur":0.0455,"Maipu":0.0909,"Nunoa":0.1364,"Penalolen":0.1364,"Pocuro":0.0909,"Providencia":0.0909,"San Miguel":0.1364,"Tabancura":0.0455},"Ent Queque Chocolate":{"Chicureo":0.0556,"La Florida":0.0556,"La Reina":0.0556,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.1111,"Nunoa":0.1111,"Penalolen":0.0556,"Pocuro":0.0556,"Providencia":0.1111,"San Miguel":0.1111,"Tabancura":0.0556},"Ent Queque Zanahoria":{"Chicureo":0.0556,"La Florida":0.0556,"La Reina":0.0556,"Lastarria":0.1111,"Los Militares":0.1111,"Luis Pasteur":0.0556,"Maipu":0.0556,"Nunoa":0.1667,"Penalolen":0.0556,"Pocuro":0.0556,"Providencia":0.1111,"San Miguel":0.1111,"Tabancura":0.0556},"Ent Queque Plátano":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769},"Troz Queque S/A Zanahoria":{"Chicureo":0.0366,"La Florida":0.0854,"La Reina":0.0488,"Lastarria":0.0854,"Los Militares":0.1098,"Luis Pasteur":0.0366,"Maipu":0.0854,"Nunoa":0.1463,"Penalolen":0.1098,"Pocuro":0.0488,"Providencia":0.0854,"San Miguel":0.1098,"Tabancura":0.0366},"Troz Queque Zanahoria":{"Chicureo":0.0357,"La Florida":0.0714,"La Reina":0.0357,"Lastarria":0.1429,"Los Militares":0.1071,"Luis Pasteur":0.0357,"Maipu":0.0714,"Nunoa":0.1786,"Penalolen":0.0714,"Pocuro":0.0357,"Providencia":0.1429,"San Miguel":0.0714,"Tabancura":0.0357},"Troz Queque Chocolate":{"Chicureo":0.0513,"La Florida":0.0769,"La Reina":0.0513,"Lastarria":0.1026,"Los Militares":0.1026,"Luis Pasteur":0.0513,"Maipu":0.0769,"Nunoa":0.1538,"Penalolen":0.1026,"Pocuro":0.0513,"Providencia":0.1026,"San Miguel":0.0769,"Tabancura":0.0513},"Troz Queque Plátano":{"Chicureo":0.0769,"La Florida":0.0769,"La Reina":0.0769,"Lastarria":0.0769,"Los Militares":0.0769,"Luis Pasteur":0.0769,"Maipu":0.0769,"Nunoa":0.0769,"Penalolen":0.0769,"Pocuro":0.0769,"Providencia":0.0769,"San Miguel":0.0769,"Tabancura":0.0769}};
 
+const MULT={22117:5,22064:10,22058:10,22110:8,22039:8,22037:8,22129:10,22008:10,22016:10,22065:1,22059:1,22109:1,22124:1,22009:1,22063:1,22057:1,22108:1,22038:1,22036:1,22123:1,22007:1,22002:5,22086:10,22053:10,22050:10,22081:10,22092:10,22139:0,22147:8,22152:10,22088:1,22054:1,22051:1,22080:1,22094:1,22138:0,22146:1,22151:1,22087:1,22052:1,22049:1,22082:1,22093:1,22137:0,22145:1,22150:1,22031:5,22033:5,22034:5,22153:0,22003:5,22001:5,22125:5,22044:4,22083:4,22045:4,22143:4,22072:1,22084:1,22073:1,22142:1,22149:0};
 const ID2F={23044:null,23043:null,22117:"Oreo Mix Bar",22064:"Trozo Tor Red Velvet",22058:"Trozo Tor Dark Cake",22110:"Trozo Nutella Pie",22039:"Trozo Lemon Pie",22037:"Trozo Apple Pie",22129:"Trozo Ch Volcano",22008:"Trozo Ch Oreo",22016:"Trozo Ch NY Berries",22065:"Mediano Ch Oreo",22059:"Mediana Tor Dark Cake",22109:"Mediano Nutella Pie",22124:"Mediano Ch Volcano",22009:"Mediano Ch Oreo",22063:"Grande Tor Red Velvet",22057:"Grande Tor Dark Cake",22108:"Grande Nutella Pie",22038:"Grande Pie Lemon",22036:"Grande Pie Apple Crumble",22123:"Grande Ch Volcano",22007:"Grande Ch Oreo",22002:"Peanut Butter Bar",22086:"Trozo Tor Lemon Blueberry Cake",22053:"Trozo Tor Carrot Cake",22050:"Trozo Tor Brownie Man y Framb",22081:"Trozo Tor S/A Carrot Cake",22092:"Trozo Ch White Raspberry",22139:null,22147:null,22152:"Trozo Tor S/A Chocolate",22088:"Mediana Tor Lemon Blueberry Cake",22054:"Mediana Tor Carrot Cake",22051:"Mediana Tor Brownie Man y Framb",22080:"Mediana Tor S/A Carrot Cake",22094:"Mediano Ch White Raspberry",22138:null,22146:null,22151:"Mediana Tor S/A Chocolate",22087:"Grande Tor Lemon Blueberry Cake",22052:"Grande Tor Carrot Cake",22049:"Grande Tor Brownie Man y Framb",22082:"Grande Tor S/A Carrot Cake",22093:"Grande Ch White Raspberry",22137:null,22145:null,22150:"Grande Tor S/A Chocolate",22031:"Cookie Avena Cranberry",22033:"Cookie Chocolate Chip Walnut",22034:"Cookie Triple Chocolate",22153:null,22003:"Brownie Húmedo Tradicional",22001:"Brownie con Dulce Leche",22125:"Lemonie",22044:"Troz Queque Chocolate",22083:"Troz Queque S/A Zanahoria",22045:"Troz Queque Zanahoria",22143:"Troz Queque Plátano",22072:"Ent Queque Chocolate",22084:"Ent Queque S/A Zanahoria",22073:"Ent Queque Zanahoria",22142:"Ent Queque Plátano",22149:null};
 
 // ═══════════════════ STATE ═══════════════════
-let stockData={}, currentDesp=null, currentEstDay='vie';
+let stockData={};        // current stock on hand {tienda: {id: units}}
+let baselineStock={};    // thursday baseline stock (never changes once set)
+let dispatchedDDM={};   // cumulative DDM units dispatched {id: {tienda: units}}
+let currentDesp=null;
+let currentEstDay='vie';
+const AM_ONLY=['Chicureo','Maipu'];  // stores that only receive AM dispatches
+
+// Coverage overrides for AM-only stores
+const COVERAGE_AM_ONLY={
+  vie_AM:{vie:1.0,sab:1.0,dom:0.30},
+  sab_AM:{sab:1.0,dom:1.0},
+  dom_AM:{dom:1.0},
+  dom_PM:{dom:1.0},
+};
 
 // ═══════════════════ HELPERS ═══════════════════
 function getSh(id,t){const fn=ID2F[id];if(fn&&SH[fn])return SH[fn][t]||1/13;return 1/13;}
-function getTope(id,t){return Math.round((DDM[id]||0)*getSh(id,t));}
-function getCov(id,t,dk){const tot=(DDM[id]||0)*getSh(id,t);const cov=COVERAGE[dk];let d=0;for(const[day,c]of Object.entries(cov))d+=DAY_SPLIT[day]*c*tot;return d;}
-function calcSend(id,t,dk){const s=stockData[t]?.[id]||0;const needed=Math.max(0,getCov(id,t,dk)-s);const max=Math.max(0,getTope(id,t)-s);return Math.max(0,Math.ceil(Math.min(needed,max)));}
+
+// Coverage for a specific tienda+despacho (AM-only stores get special coverage)
+function getCoverage(t,dk){
+  if(AM_ONLY.includes(t)&&COVERAGE_AM_ONLY[dk]) return COVERAGE_AM_ONLY[dk];
+  return COVERAGE[dk];
+}
+
+// Objective = how many units this tienda needs in stock for this despacho's coverage
+function getCovObj(id,t,dk){
+  const tot=(DDM[id]||0)*getSh(id,t);
+  const cov=getCoverage(t,dk);
+  let d=0;
+  for(const[day,c]of Object.entries(cov)) d+=DAY_SPLIT[day]*c*tot;
+  return d;
+}
+
+// Stock available in camara for DDM = total DDM - already dispatched to all tiendas
+function getCamaraDisponible(id){
+  const totalDDM=DDM[id]||0;
+  const alreadyDispatched=TIENDAS.reduce((s,t)=>(dispatchedDDM[id]?.[t]||0)+s,0);
+  return Math.max(0,totalDDM-alreadyDispatched);
+}
+
+// Main dispatch calculation for a full despacho (all tiendas together per product)
+// Returns {tienda: units_to_send}
+function calcDispatchForProduct(id,dk){
+  const result={};
+  const mult=MULT[id]||1;
+  if(mult===0) return Object.fromEntries(TIENDAS.map(t=>[t,0]));
+
+  const camaraDisp=getCamaraDisponible(id);
+  if(camaraDisp<=0) return Object.fromEntries(TIENDAS.map(t=>[t,0]));
+
+  // Skip PM dispatches for AM-only stores
+  const isPM=dk.endsWith('_PM');
+
+  // Step 1: compute raw needed per tienda
+  const needed={};
+  TIENDAS.forEach(t=>{
+    if(isPM&&AM_ONLY.includes(t)){needed[t]=0;return;}
+    const stock=stockData[t]?.[id]||0;
+    const obj=getCovObj(id,t,dk);
+    needed[t]=Math.max(0,obj-stock);
+  });
+
+  // Step 2: total needed vs available in camara
+  const totalNeeded=Object.values(needed).reduce((a,b)=>a+b,0);
+
+  if(totalNeeded<=0) return Object.fromEntries(TIENDAS.map(t=>[t,0]));
+
+  if(totalNeeded<=camaraDisp){
+    // Enough stock for everyone — give each tienda what it needs (rounded to mult)
+    TIENDAS.forEach(t=>{
+      const raw=needed[t];
+      result[t]=raw<=0?0:Math.ceil(raw/mult)*mult;
+    });
+  } else {
+    // Not enough — distribute available stock prioritizing tiendas with lowest coverage ratio
+    // Coverage ratio = current_stock / full_ddm_objective
+    const fullObj={};
+    TIENDAS.forEach(t=>{
+      const totTienda=(DDM[id]||0)*getSh(id,t);
+      fullObj[t]=totTienda>0?totTienda:1;
+    });
+
+    // Sort tiendas by coverage ratio ascending (most uncovered first)
+    const tiendaOrder=TIENDAS
+      .filter(t=>!(isPM&&AM_ONLY.includes(t)))
+      .filter(t=>needed[t]>0)
+      .sort((a,b)=>{
+        const ratioA=(stockData[a]?.[id]||0)/fullObj[a];
+        const ratioB=(stockData[b]?.[id]||0)/fullObj[b];
+        return ratioA-ratioB;
+      });
+
+    // Initialize all to 0
+    TIENDAS.forEach(t=>result[t]=0);
+
+    // Distribute in mult-sized chunks to most uncovered tiendas first
+    let remaining=Math.floor(camaraDisp/mult)*mult;
+    for(const t of tiendaOrder){
+      if(remaining<=0) break;
+      const toSend=Math.min(Math.ceil(needed[t]/mult)*mult,remaining);
+      result[t]=toSend;
+      remaining-=toSend;
+    }
+  }
+
+  return result;
+}
+
+// Convenience: get send for single tienda (used in render)
+function calcSend(id,t,dk){
+  return (calcDispatchForProduct(id,dk)[t])||0;
+}
+
+// Compute full dispatch matrix for all products (cached per render call)
+function computeAllDispatches(dk){
+  const matrix={};
+  LISTA.forEach(item=>{
+    matrix[item.ID]=calcDispatchForProduct(item.ID,dk);
+  });
+  return matrix;
+}
 function estDay(id,day){return Math.round((DDM[id]||0)*DAY_SPLIT[day]);}
 function estDayTienda(id,t,day){return Math.round((DDM[id]||0)*getSh(id,t)*DAY_SPLIT[day]);}
 function showMsg(elId,txt,type){document.getElementById(elId).innerHTML=`<div class="msg msg-${type}">${txt}</div>`;}
@@ -322,11 +437,16 @@ function importStock(inp){
       const tc=Object.keys(ns).length;
       if(tc===0){showMsg('msg-despacho','No se encontraron tiendas en el archivo.','err');return;}
       stockData=ns;
+      // Save as baseline if this is the first load (thursday stock)
+      if(Object.keys(baselineStock).length===0){
+        baselineStock=JSON.parse(JSON.stringify(ns));
+      }
       const dm=file.name.match(/(\d{4}-\d{2}-\d{2})-(\d{2})-(\d{2})/);
       const label=dm?`${dm[1]} ${dm[2]}:${dm[3]}`:file.name;
+      const isBaseline=Object.keys(baselineStock).length>0&&JSON.stringify(baselineStock)===JSON.stringify(ns);
       const zone=document.getElementById('upload-zone');
       zone.classList.add('loaded');
-      zone.innerHTML=`<div class="upload-icon">✓</div><div class="upload-title">${label}</div><div class="upload-sub">${tc} tiendas cargadas — click para cambiar</div>`;
+      zone.innerHTML=`<div class="upload-icon">✓</div><div class="upload-title">${label}</div><div class="upload-sub">${tc} tiendas · ${isBaseline?'baseline jueves':'stock actualizado'} — click para cambiar</div>`;
       document.getElementById('btn-export').classList.remove('btn-disabled');
       showMsg('msg-despacho',`Stock cargado: ${label} · ${tc} tiendas`,'ok');
       if(currentDesp) renderDespacho();
@@ -347,50 +467,83 @@ function selectDesp(key){
 
 function renderDespacho(){
   if(!currentDesp||!Object.keys(stockData).length) return;
+  const isPM=currentDesp.endsWith('_PM');
+  const matrix=computeAllDispatches(currentDesp);
   let totalU=0,totalI=0;
   const tTots=Object.fromEntries(TIENDAS.map(t=>[t,0]));
   const rows=LISTA.map(item=>{
-    const sends=TIENDAS.map(t=>calcSend(item.ID,t,currentDesp));
+    const sends=TIENDAS.map(t=>matrix[item.ID]?.[t]||0);
     const rt=sends.reduce((a,b)=>a+b,0);
     totalU+=rt;if(rt>0)totalI++;
     sends.forEach((v,i)=>tTots[TIENDAS[i]]+=v);
     return{...item,sends,rt};
   });
-  const covStr=Object.entries(COVERAGE[currentDesp]).map(([d,c])=>`${Math.round(c*100)}% ${d}`).join(' + ');
+  const covObj=currentDesp;
+  // Build coverage string showing AM-only note if PM
+  let covStr=Object.entries(COVERAGE[currentDesp]).map(([d,c])=>`${Math.round(c*100)}% ${d}`).join(' + ');
+  if(isPM) covStr+=' · Chicureo/Maipu: solo AM';
+  const camaraTotal=LISTA.reduce((s,item)=>s+getCamaraDisponible(item.ID),0);
   let html=`<div class="metrics">
     <div class="metric"><div class="metric-label">Despacho</div><div class="metric-value" style="font-size:15px">${DESP_LABELS[currentDesp]}</div></div>
-    <div class="metric"><div class="metric-label">Unidades totales</div><div class="metric-value accent">${totalU.toLocaleString()}</div></div>
-    <div class="metric"><div class="metric-label">Productos activos</div><div class="metric-value">${totalI}</div></div>
-    <div class="metric"><div class="metric-label">Cobertura objetivo</div><div class="metric-value" style="font-size:12px;margin-top:4px">${covStr}</div></div>
+    <div class="metric"><div class="metric-label">Unidades a enviar</div><div class="metric-value accent">${totalU.toLocaleString()}</div></div>
+    <div class="metric"><div class="metric-label">Stock DDM en cámara</div><div class="metric-value">${camaraTotal.toLocaleString()}</div></div>
+    <div class="metric"><div class="metric-label">Cobertura objetivo</div><div class="metric-value" style="font-size:11px;margin-top:4px">${covStr}</div></div>
+  </div>
+  <div style="display:flex;justify-content:flex-end;margin-bottom:8px">
+    <button class="btn btn-accent" onclick="confirmDispatch('${currentDesp}')">Confirmar despacho ✓</button>
   </div>
   <div class="table-wrap"><table><thead><tr>
-    <th class="sml">Tipo</th><th class="sml">Pos</th><th style="width:68px">Art. #</th><th class="lft">Artículo</th>`;
-  TIENDAS.forEach(t=>{html+=`<th>${t.split(' ')[0]}<br><span style="font-weight:400;color:#444;font-size:9px">${t.split(' ').slice(1).join(' ')}</span></th>`;});
+    <th class="sml">Tipo</th><th class="sml">Pos</th><th style="width:68px">Art. #</th><th class="lft">Artículo</th><th style="width:52px">Cámara</th>`;
+  TIENDAS.forEach(t=>{
+    const isAmOnly=AM_ONLY.includes(t);
+    html+=`<th>${t.split(' ')[0]}<br><span style="font-size:9px;font-weight:400;color:${isAmOnly?'var(--accent)':'#888'}">${isAmOnly?'solo AM':t.split(' ').slice(1).join(' ')}</span></th>`;
+  });
   html+=`<th>Total</th></tr></thead><tbody>`;
   let lastTipo='';
   rows.forEach(r=>{
     if(r.T!==lastTipo){
       lastTipo=r.T;
-      html+=`<tr class="section-row"><td colspan="${4+TIENDAS.length+1}">Tipo ${r.T}</td></tr>`;
+      html+=`<tr class="section-row"><td colspan="${5+TIENDAS.length+1}">Tipo ${r.T}</td></tr>`;
     }
+    const camDisp=getCamaraDisponible(r.ID);
     html+=`<tr><td class="tipo-${r.T.toLowerCase()}">${r.T}</td><td class="num" style="text-align:right">${r.P}</td><td class="num">${r.ID}</td><td class="lft">${r.N}</td>`;
+    html+=`<td class="num" style="color:${camDisp<10&&camDisp>0?'var(--amber)':camDisp===0?'var(--text3)':'var(--text2)'}">${camDisp||'—'}</td>`;
     r.sends.forEach((v,i)=>{
-      const tope=getTope(r.ID,TIENDAS[i]);
-      const stock=stockData[TIENDAS[i]]?.[r.ID]||0;
-      const cls=v===0?'v-zero':v>=tope*0.8?'v-send':'v-part';
-      html+=`<td class="${cls}" title="Stock: ${stock} | Tope: ${tope} | Cob: ${Math.round(getCov(r.ID,TIENDAS[i],currentDesp))}">${v||'—'}</td>`;
+      const t=TIENDAS[i];
+      const stock=stockData[t]?.[r.ID]||0;
+      const obj=Math.round(getCovObj(r.ID,t,currentDesp));
+      const camD=getCamaraDisponible(r.ID);
+      const totalNeeded=TIENDAS.reduce((s,tt)=>s+Math.max(0,getCovObj(r.ID,tt,currentDesp)-(stockData[tt]?.[r.ID]||0)),0);
+      const isAmOnlySkip=isPM&&AM_ONLY.includes(t);
+      const isCapped=!isAmOnlySkip&&totalNeeded>camD&&v>0;
+      const cls=isAmOnlySkip?'v-zero':v===0?'v-zero':isCapped?'v-part':'v-send';
+      const title=isAmOnlySkip?'Solo AM':'Stock: '+stock+' | Objetivo: '+obj+' | Cámara: '+camD+' | Múlt: '+(MULT[r.ID]||1);
+      html+=`<td class="${cls}" title="${title}">${isAmOnlySkip?'AM':v||'—'}</td>`;
     });
     html+=`<td class="${r.rt>0?'v-bold':'v-zero'}">${r.rt||'—'}</td></tr>`;
   });
-  html+=`<tr class="total-row"><td colspan="4">Total despacho</td>`;
+  html+=`<tr class="total-row"><td colspan="5">Total despacho</td>`;
   TIENDAS.forEach(t=>{html+=`<td>${tTots[t]||'—'}</td>`;});
   html+=`<td>${totalU.toLocaleString()}</td></tr></tbody></table></div>
   <div class="legend" style="margin-top:10px">
-    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Despacho completo (≥80% tope)</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div>Despacho parcial</div>
-    <div class="leg" style="color:var(--text3)">— sin envío · Hover = stock / tope / cobertura</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Cubre objetivo completo</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div>Limitado por stock en cámara — se redistribuyó a tiendas con menor cobertura</div>
+    <div class="leg" style="color:var(--text3)">— sin envío · AM = tienda solo recibe despacho AM · Col "Cámara" = stock DDM disponible</div>
   </div>`;
   document.getElementById('results-despacho').innerHTML=html;
+}
+
+// Register confirmed dispatch — subtracts from DDM budget
+function confirmDispatch(dk){
+  const matrix=computeAllDispatches(dk);
+  LISTA.forEach(item=>{
+    if(!dispatchedDDM[item.ID]) dispatchedDDM[item.ID]={};
+    TIENDAS.forEach(t=>{
+      dispatchedDDM[item.ID][t]=(dispatchedDDM[item.ID][t]||0)+(matrix[item.ID]?.[t]||0);
+    });
+  });
+  showMsg('msg-despacho',`Despacho <strong>${DESP_LABELS[dk]}</strong> confirmado. Las unidades se descontaron del presupuesto DDM. Cargá el próximo stock on hand.`,'ok');
+  renderDespacho();
 }
 
 // ═══════════════════ ESTIMADOS × PRODUCTO ═══════════════════
@@ -467,16 +620,17 @@ function exportXLSX(){
   if(!currentDesp||!Object.keys(stockData).length){
     showMsg('msg-despacho','Subí el stock y elegí un despacho primero.','err');return;
   }
-  const rows=[['TIPO','Pos','Num.Articulo','Articulo',...TIENDAS,'TOTAL']];
+  const matrix=computeAllDispatches(currentDesp);
+  const rows=[['TIPO','Pos','Num.Articulo','Articulo','Camara DDM',...TIENDAS,'TOTAL']];
   LISTA.forEach(item=>{
-    const sends=TIENDAS.map(t=>calcSend(item.ID,t,currentDesp));
-    rows.push([item.T,item.P,item.ID,item.N,...sends,sends.reduce((a,b)=>a+b,0)]);
+    const sends=TIENDAS.map(t=>matrix[item.ID]?.[t]||0);
+    rows.push([item.T,item.P,item.ID,item.N,getCamaraDisponible(item.ID),...sends,sends.reduce((a,b)=>a+b,0)]);
   });
-  const tots=TIENDAS.map((_,ti)=>LISTA.reduce((s,item)=>s+calcSend(item.ID,TIENDAS[ti],currentDesp),0));
-  rows.push(['','','','TOTAL',...tots,tots.reduce((a,b)=>a+b,0)]);
+  const tots=TIENDAS.map((_,ti)=>LISTA.reduce((s,item)=>s+(matrix[item.ID]?.[TIENDAS[ti]]||0),0));
+  rows.push(['','','','TOTAL','',...tots,tots.reduce((a,b)=>a+b,0)]);
   const wb=XLSX.utils.book_new();
   const ws=XLSX.utils.aoa_to_sheet(rows);
-  ws['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},...TIENDAS.map(()=>({wch:11})),{wch:8}];
+  ws['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},{wch:10},...TIENDAS.map(()=>({wch:11})),{wch:8}];
   XLSX.utils.book_append_sheet(wb,ws,DESP_LABELS[currentDesp]);
   XLSX.writeFile(wb,`Despacho_DDM_${currentDesp}_${new Date().toISOString().slice(0,10)}.xlsx`);
 }
