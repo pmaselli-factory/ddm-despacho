@@ -553,8 +553,8 @@ function renderDespacho(){
     html+=`<td id="rowtot_${r.ID}" class="${r.rt>0?'v-bold':'v-zero'}">${r.rt||'—'}</td></tr>`;
   });
   html+=`<tr class="total-row"><td colspan="5">Total despacho</td>`;
-  TIENDAS.forEach((t,i)=>{html+=`<td id="coltot_\${i}">\${tTots[t]||'—'}</td>`;});
-  html+=`<td id="grandtot">\${totalU.toLocaleString()}</td></tr></tbody></table></div>
+  TIENDAS.forEach((t,i)=>{html+=`<td id="coltot_${i}">${tTots[t]||'—'}</td>`;});
+  html+=`<td id="grandtot">${totalU.toLocaleString()}</td></tr></tbody></table></div>
   <div class="legend" style="margin-top:10px">
     <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Cubre objetivo completo</div>
     <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div>Limitado por stock en cámara — se redistribuyó a tiendas con menor cobertura</div>
