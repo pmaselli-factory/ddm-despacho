@@ -736,80 +736,50 @@ function renderStockResultante(){
   const matrix=dk?computeAllDispatches(dk):{};
   if(lbl) lbl.textContent=dk?`Despacho: ${DESP_LABELS[dk]}`:'(sin despacho seleccionado — mostrando solo stock actual)';
 
-  // Build table: stock actual + despacho = resultante
-  const tTotStock=Object.fromEntries(TIENDAS.map(t=>[t,0]));
-  const tTotDesp=Object.fromEntries(TIENDAS.map(t=>[t,0]));
   const tTotRes=Object.fromEntries(TIENDAS.map(t=>[t,0]));
 
-  let html=`<table><thead>
-    <tr>
-      <th class="sml" rowspan="2">T</th>
-      <th class="sml" rowspan="2">P</th>
-      <th style="width:52px" rowspan="2">Art. #</th>
-      <th class="lft" rowspan="2">Artículo</th>`;
-
-  // Tienda headers grouped by: stock / despacho / resultante
+  let html=`<table><thead><tr>
+    <th class="sml">T</th>
+    <th class="sml">P</th>
+    <th style="width:52px">Art. #</th>
+    <th class="lft">Artículo</th>`;
   TIENDAS.forEach(t=>{
-    html+=`<th colspan="3" style="border-bottom:0.5px solid var(--border);font-size:9px">${t.split(' ')[0]}<span style="font-size:8px;font-weight:400;display:block;color:var(--text3)">${t.split(' ').slice(1).join(' ')}</span></th>`;
+    html+=`<th style="width:46px;font-size:9px">${t.split(' ')[0]}<span style="font-size:8px;font-weight:400;display:block;color:var(--text3)">${t.split(' ').slice(1).join(' ')}</span></th>`;
   });
-  html+=`<th colspan="3" style="border-bottom:0.5px solid var(--border)">Total red</th></tr>
-  <tr>`;
-  // Sub-headers per tienda: Stk / Env / Res
-  TIENDAS.forEach(()=>{
-    html+=`<th style="font-size:8px;color:#1d4ed8;width:26px">Stk</th>`;
-    html+=`<th style="font-size:8px;color:var(--green);width:26px">Env</th>`;
-    html+=`<th style="font-size:8px;font-weight:700;width:26px">Res</th>`;
-  });
-  html+=`<th style="font-size:8px;color:#1d4ed8">Stk</th><th style="font-size:8px;color:var(--green)">Env</th><th style="font-size:8px;font-weight:700">Res</th>`;
-  html+=`</tr></thead><tbody>`;
+  html+=`<th>Total</th></tr></thead><tbody>`;
 
   let lastTipo='';
-  let grandStk=0,grandEnv=0,grandRes=0;
+  let grandTotal=0;
 
   LISTA.forEach(r=>{
     if(r.T!==lastTipo){
       lastTipo=r.T;
-      const cols=4+TIENDAS.length*3+3;
-      html+=`<tr class="section-row"><td colspan="${cols}">Tipo ${r.T}</td></tr>`;
+      html+=`<tr class="section-row"><td colspan="${4+TIENDAS.length+1}">Tipo ${r.T}</td></tr>`;
     }
-
-    let rowStk=0,rowEnv=0,rowRes=0;
+    let rowTotal=0;
     html+=`<tr><td class="tipo-${r.T.toLowerCase()}">${r.T}</td><td class="num" style="text-align:right">${r.P}</td><td class="num">${r.ID}</td><td class="lft">${r.N}</td>`;
-
     TIENDAS.forEach((t,i)=>{
       const stk=stockData[t]?.[r.ID]||0;
       const inp=document.getElementById(`cell_${r.ID}_${i}`);
       const env=dk?(inp?parseInt(inp.value)||0:(matrix[r.ID]?.[t]||0)):0;
       const res=stk+env;
-
-      rowStk+=stk; rowEnv+=env; rowRes+=res;
-      tTotStock[t]+=stk; tTotDesp[t]+=env; tTotRes[t]+=res;
-
-      // Color resultante: green if has stock, amber if sending but still low, gray if zero
-      const resColor=res===0?'var(--text3)':env>0?'var(--green)':'var(--text2)';
-      html+=`<td class="num" style="color:#1d4ed8">${stk||'—'}</td>`;
-      html+=`<td class="num" style="color:var(--green)">${env||'—'}</td>`;
-      html+=`<td class="num" style="color:${resColor};font-weight:${res>0?600:400}">${res||'—'}</td>`;
+      rowTotal+=res;
+      tTotRes[t]+=res;
+      const col=res===0?'var(--text3)':env>0?'var(--green)':'var(--text2)';
+      html+=`<td style="font-family:var(--mono);font-size:10px;font-weight:${res>0?600:400};color:${col}">${res||'—'}</td>`;
     });
-
-    grandStk+=rowStk; grandEnv+=rowEnv; grandRes+=rowRes;
-    html+=`<td class="num" style="color:#1d4ed8;font-weight:500">${rowStk||'—'}</td>`;
-    html+=`<td class="num" style="color:var(--green);font-weight:500">${rowEnv||'—'}</td>`;
-    html+=`<td class="num" style="font-weight:700;color:${rowRes>0?'var(--text)':'var(--text3)'}">${rowRes||'—'}</td>`;
-    html+=`</tr>`;
+    grandTotal+=rowTotal;
+    html+=`<td style="font-family:var(--mono);font-size:10px;font-weight:600;color:${rowTotal>0?'var(--text)':'var(--text3)'}">${rowTotal||'—'}</td></tr>`;
   });
 
-  // Total row
   html+=`<tr class="total-row"><td colspan="4">Total</td>`;
-  TIENDAS.forEach(t=>{
-    html+=`<td style="color:#1d4ed8">${tTotStock[t]||'—'}</td>`;
-    html+=`<td style="color:var(--green)">${tTotDesp[t]||'—'}</td>`;
-    html+=`<td style="font-weight:700">${tTotRes[t]||'—'}</td>`;
-  });
-  html+=`<td style="color:#1d4ed8">${grandStk.toLocaleString()}</td>`;
-  html+=`<td style="color:var(--green)">${grandEnv.toLocaleString()}</td>`;
-  html+=`<td style="font-weight:700">${grandRes.toLocaleString()}</td>`;
-  html+=`</tr></tbody></table>`;
+  TIENDAS.forEach(t=>{html+=`<td>${tTotRes[t]||'—'}</td>`;});
+  html+=`<td>${grandTotal.toLocaleString()}</td></tr></tbody></table>
+  <div class="legend" style="margin-top:8px">
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Stock resultante con despacho incluido</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--text2)"></div>Stock existente sin despacho</div>
+    <div class="leg" style="color:var(--text3)">— sin stock</div>
+  </div>`;
   el.innerHTML=html;
 }
 
@@ -837,28 +807,27 @@ function exportXLSX(){
   ws['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},{wch:10},...TIENDAS.map(()=>({wch:11})),{wch:8}];
   XLSX.utils.book_append_sheet(wb,ws,DESP_LABELS[currentDesp]);
 
-  // Sheet 2: Stock resultante
-  const srHeader1=['TIPO','Pos','Num.Articulo','Articulo'];
-  TIENDAS.forEach(t=>{srHeader1.push(t+' Stock',t+' Despacho',t+' Resultante');});
-  srHeader1.push('Total Stock','Total Despacho','Total Resultante');
-  const srRows=[srHeader1];
+  // Sheet 2: Stock Resultante (stock actual + despacho)
+  const srRows=[['TIPO','Pos','Num.Articulo','Articulo',...TIENDAS,'TOTAL']];
   LISTA.forEach(item=>{
     const row=[item.T,item.P,item.ID,item.N];
-    let rStk=0,rEnv=0,rRes=0;
+    let rowTotal=0;
     TIENDAS.forEach((t,i)=>{
       const stk=stockData[t]?.[item.ID]||0;
       const inp=document.getElementById(`cell_${item.ID}_${i}`);
       const env=inp?parseInt(inp.value)||0:(matrix[item.ID]?.[t]||0);
       const res=stk+env;
-      row.push(stk,env,res);
-      rStk+=stk;rEnv+=env;rRes+=res;
+      row.push(res);
+      rowTotal+=res;
     });
-    row.push(rStk,rEnv,rRes);
+    row.push(rowTotal);
     srRows.push(row);
   });
+  // Totals row
+  const srTots=TIENDAS.map((_,ti)=>srRows.slice(1).reduce((s,r)=>s+(r[4+ti]||0),0));
+  srRows.push(['','','','TOTAL',...srTots,srTots.reduce((a,b)=>a+b,0)]);
   const wsSR=XLSX.utils.aoa_to_sheet(srRows);
-  const srColW=[{wch:5},{wch:4},{wch:13},{wch:38},...TIENDAS.flatMap(()=>[{wch:9},{wch:9},{wch:9}]),{wch:11},{wch:11},{wch:11}];
-  wsSR['!cols']=srColW;
+  wsSR['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},...TIENDAS.map(()=>({wch:11})),{wch:8}];
   XLSX.utils.book_append_sheet(wb,wsSR,'Stock Resultante');
 
   XLSX.writeFile(wb,`Despacho_DDM_${currentDesp}_${new Date().toISOString().slice(0,10)}.xlsx`);
