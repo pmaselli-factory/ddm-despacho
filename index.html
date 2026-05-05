@@ -173,6 +173,7 @@ tr.total-row td { background: var(--bg3); font-weight: 600; color: var(--text); 
   <div class="topbar-right">
     <div class="pill">10 mayo 2026</div>
     <button class="btn btn-green btn-disabled" id="btn-export" onclick="exportXLSX()">Exportar Excel ↓</button>
+    <button class="btn btn-ghost btn-disabled" id="btn-undo" onclick="undoLastDispatch()" disabled>Deshacer confirmación</button>
   </div>
 </header>
 
@@ -485,7 +486,7 @@ function renderDespacho(){
   const camaraTotal=LISTA.reduce((s,item)=>s+getCamaraDisponible(item.ID),0);
   let html=`<div class="metrics">
     <div class="metric"><div class="metric-label">Despacho</div><div class="metric-value" style="font-size:15px">${DESP_LABELS[currentDesp]}</div></div>
-    <div class="metric"><div class="metric-label">Unidades a enviar</div><div class="metric-value accent">${totalU.toLocaleString()}</div></div>
+    <div class="metric"><div class="metric-label">Unidades a enviar</div><div class="metric-value accent" id="metric-units">${totalU.toLocaleString()}</div></div>
     <div class="metric"><div class="metric-label">Stock DDM en cámara</div><div class="metric-value">${camaraTotal.toLocaleString()}</div></div>
     <div class="metric"><div class="metric-label">Cobertura objetivo</div><div class="metric-value" style="font-size:11px;margin-top:4px">${covStr}</div></div>
   </div>
@@ -518,13 +519,25 @@ function renderDespacho(){
       const isCapped=!isAmOnlySkip&&totalNeeded>camD&&v>0;
       const cls=isAmOnlySkip?'v-zero':v===0?'v-zero':isCapped?'v-part':'v-send';
       const title=isAmOnlySkip?'Solo AM':'Stock: '+stock+' | Objetivo: '+obj+' | Cámara: '+camD+' | Múlt: '+(MULT[r.ID]||1);
-      html+=`<td class="${cls}" title="${title}">${isAmOnlySkip?'AM':v||'—'}</td>`;
+      if(isAmOnlySkip){
+        html+=`<td class="v-zero" title="Solo AM" style="font-size:10px;color:var(--accent)">AM</td>`;
+      } else {
+        html+=`<td style="padding:2px 3px;" title="${title}">
+          <input id="cell_${r.ID}_${i}" type="number" min="0" value="${v}"
+            style="width:44px;font-size:11px;text-align:center;font-family:var(--mono);
+              background:${v===0?'transparent':isCapped?'#fffbeb':'#f0fdf4'};
+              color:${v===0?'var(--text3)':isCapped?'var(--amber)':'var(--green)'};
+              border:0.5px solid ${v===0?'transparent':isCapped?'#fde68a':'#bbf7d0'};
+              border-radius:3px;padding:2px 3px;font-weight:${v>0?600:400}"
+            onchange="updateRowTotal(${r.ID})">
+        </td>`;
+      }
     });
-    html+=`<td class="${r.rt>0?'v-bold':'v-zero'}">${r.rt||'—'}</td></tr>`;
+    html+=`<td id="rowtot_${r.ID}" class="${r.rt>0?'v-bold':'v-zero'}">${r.rt||'—'}</td></tr>`;
   });
   html+=`<tr class="total-row"><td colspan="5">Total despacho</td>`;
-  TIENDAS.forEach(t=>{html+=`<td>${tTots[t]||'—'}</td>`;});
-  html+=`<td>${totalU.toLocaleString()}</td></tr></tbody></table></div>
+  TIENDAS.forEach((t,i)=>{html+=`<td id="coltot_\${i}">\${tTots[t]||'—'}</td>`;});
+  html+=`<td id="grandtot">\${totalU.toLocaleString()}</td></tr></tbody></table></div>
   <div class="legend" style="margin-top:10px">
     <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Cubre objetivo completo</div>
     <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div>Limitado por stock en cámara — se redistribuyó a tiendas con menor cobertura</div>
@@ -533,20 +546,88 @@ function renderDespacho(){
   document.getElementById('results-despacho').innerHTML=html;
 }
 
-// Register confirmed dispatch — subtracts from DDM budget
+// History stack for undo
+let dispatchHistory=[];  // [{dk, snapshot}]
+
+// Called when user clicks "Confirmar despacho" — reads editable cells and registers
 function confirmDispatch(dk){
-  const matrix=computeAllDispatches(dk);
+  if(!confirm(`¿Confirmás el despacho ${DESP_LABELS[dk]}?\nEsto descontará las cantidades del presupuesto DDM.`)) return;
+
+  // Save snapshot for undo
+  dispatchHistory.push({
+    dk,
+    label: DESP_LABELS[dk],
+    snapshot: JSON.parse(JSON.stringify(dispatchedDDM))
+  });
+
+  // Read values from editable cells (may have been manually modified)
   LISTA.forEach(item=>{
     if(!dispatchedDDM[item.ID]) dispatchedDDM[item.ID]={};
-    TIENDAS.forEach(t=>{
-      dispatchedDDM[item.ID][t]=(dispatchedDDM[item.ID][t]||0)+(matrix[item.ID]?.[t]||0);
+    TIENDAS.forEach((t,i)=>{
+      const inp=document.getElementById(`cell_${item.ID}_${i}`);
+      const val=inp?parseInt(inp.value)||0:(computeAllDispatches(dk)[item.ID]?.[t]||0);
+      dispatchedDDM[item.ID][t]=(dispatchedDDM[item.ID][t]||0)+val;
     });
   });
-  showMsg('msg-despacho',`Despacho <strong>${DESP_LABELS[dk]}</strong> confirmado. Las unidades se descontaron del presupuesto DDM. Cargá el próximo stock on hand.`,'ok');
+
+  updateUndoBtn();
+  showMsg('msg-despacho',`Despacho <strong>${DESP_LABELS[dk]}</strong> confirmado. Unidades descontadas del presupuesto DDM.`,'ok');
   renderDespacho();
 }
 
-// ═══════════════════ ESTIMADOS × PRODUCTO ═══════════════════
+function undoLastDispatch(){
+  if(!dispatchHistory.length) return;
+  const last=dispatchHistory.pop();
+  dispatchedDDM=last.snapshot;
+  updateUndoBtn();
+  showMsg('msg-despacho',`Despacho <strong>${last.label}</strong> deshecho. Presupuesto DDM restaurado.`,'info');
+  renderDespacho();
+}
+
+function updateUndoBtn(){
+  const btn=document.getElementById('btn-undo');
+  if(!btn) return;
+  if(dispatchHistory.length>0){
+    btn.classList.remove('btn-disabled');
+    btn.disabled=false;
+    btn.textContent=`Deshacer: ${dispatchHistory[dispatchHistory.length-1].label} ↩`;
+  } else {
+    btn.classList.add('btn-disabled');
+    btn.disabled=true;
+    btn.textContent='Deshacer confirmación';
+  }
+}
+
+// Update row total when a cell is manually edited
+function updateRowTotal(id){
+  let tot=0;
+  TIENDAS.forEach((_,i)=>{
+    const inp=document.getElementById(`cell_${id}_${i}`);
+    tot+=inp?parseInt(inp.value)||0:0;
+  });
+  const el=document.getElementById(`rowtot_${id}`);
+  if(el) el.textContent=tot||'—';
+  // Update column totals
+  updateColTotals();
+}
+
+function updateColTotals(){
+  let grandTotal=0;
+  TIENDAS.forEach((_,i)=>{
+    let colTot=0;
+    LISTA.forEach(item=>{
+      const inp=document.getElementById(`cell_${item.ID}_${i}`);
+      colTot+=inp?parseInt(inp.value)||0:0;
+    });
+    const el=document.getElementById(`coltot_${i}`);
+    if(el){el.textContent=colTot||'—';}
+    grandTotal+=colTot;
+  });
+  const gt=document.getElementById('grandtot');
+  if(gt) gt.textContent=grandTotal.toLocaleString();
+  const mu=document.getElementById('metric-units');
+  if(mu) mu.textContent=grandTotal.toLocaleString();
+}
 function renderEstProducto(){
   let html=`<table><thead><tr>
     <th class="sml">Tipo</th><th class="sml">Pos</th><th style="width:68px">Art. #</th><th class="lft">Artículo</th>
@@ -623,10 +704,16 @@ function exportXLSX(){
   const matrix=computeAllDispatches(currentDesp);
   const rows=[['TIPO','Pos','Num.Articulo','Articulo','Camara DDM',...TIENDAS,'TOTAL']];
   LISTA.forEach(item=>{
-    const sends=TIENDAS.map(t=>matrix[item.ID]?.[t]||0);
+    const sends=TIENDAS.map((t,i)=>{
+      const inp=document.getElementById(`cell_${item.ID}_${i}`);
+      return inp?parseInt(inp.value)||0:(matrix[item.ID]?.[t]||0);
+    });
     rows.push([item.T,item.P,item.ID,item.N,getCamaraDisponible(item.ID),...sends,sends.reduce((a,b)=>a+b,0)]);
   });
-  const tots=TIENDAS.map((_,ti)=>LISTA.reduce((s,item)=>s+(matrix[item.ID]?.[TIENDAS[ti]]||0),0));
+  const tots=TIENDAS.map((_,ti)=>LISTA.reduce((s,item)=>{
+    const inp=document.getElementById(`cell_${item.ID}_${ti}`);
+    return s+(inp?parseInt(inp.value)||0:(matrix[item.ID]?.[TIENDAS[ti]]||0));
+  },0));
   rows.push(['','','','TOTAL','',...tots,tots.reduce((a,b)=>a+b,0)]);
   const wb=XLSX.utils.book_new();
   const ws=XLSX.utils.aoa_to_sheet(rows);
