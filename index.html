@@ -190,7 +190,7 @@ input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
   </div>
   <div class="topbar-right">
     <div class="pill">10 mayo 2026</div>
-    <button class="btn btn-green btn-disabled" id="btn-export" onclick="exportXLSX()">Exportar Excel ↓</button>
+    <button class="btn btn-green" id="btn-export" onclick="exportXLSX()">Exportar Excel ↓</button>
     <button class="btn btn-ghost btn-disabled" id="btn-undo" onclick="undoLastDispatch()" disabled>Deshacer confirmación</button>
   </div>
 </header>
@@ -476,7 +476,7 @@ function importStock(inp){
       const zone=document.getElementById('upload-zone');
       zone.classList.add('loaded');
       zone.innerHTML=`<div class="upload-icon">✓</div><div class="upload-title">${label}</div><div class="upload-sub">${tc} tiendas · ${isBaseline?'baseline jueves':'stock actualizado'} — click para cambiar</div>`;
-      document.getElementById('btn-export').classList.remove('btn-disabled');
+
       showMsg('msg-despacho',`Stock cargado: ${label} · ${tc} tiendas`,'ok');
       if(currentDesp) renderDespacho();
       else showMsg('msg-despacho',`Stock cargado: <strong>${label}</strong>. Elegí el despacho a organizar.`,'ok');
@@ -794,8 +794,7 @@ function exportXLSX(){
   if(currentTab==='despacho'){
     if(!currentDesp||!Object.keys(stockData).length){
       showMsg('msg-despacho','Subí el stock y elegí un despacho primero.','err');return;
-    }
-    const matrix=computeAllDispatches(currentDesp);
+    }    const matrix=computeAllDispatches(currentDesp);
     const rows=[['TIPO','Pos','Num.Articulo','Articulo','Camara DDM',...TIENDAS,'TOTAL']];
     LISTA.forEach(item=>{
       const sends=TIENDAS.map((t,i)=>{
