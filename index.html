@@ -836,21 +836,19 @@ function exportXLSX(){
     filename=`DDM_Estimados_Producto_${date}`;
 
   } else if(currentTab==='est-tienda'){
+    const day=currentEstDay;
+    const dayLabel={vie:'Viernes',sab:'Sabado',dom:'Domingo'}[day];
     const rows=[['TIPO','Pos','Num.Articulo','Articulo',...TIENDAS,'TOTAL']];
-    ['vie','sab','dom'].forEach(day=>{
-      const label={vie:'Viernes',sab:'Sabado',dom:'Domingo'}[day];
-      const dayRows=[...rows.slice(0,1)]; // reuse header
-      LISTA.forEach(r=>{
-        const vals=TIENDAS.map(t=>estDayTienda(r.ID,t,day));
-        dayRows.push([r.T,r.P,r.ID,r.N,...vals,vals.reduce((a,b)=>a+b,0)]);
-      });
-      const tots=TIENDAS.map((_,ti)=>dayRows.slice(1).reduce((s,r)=>s+(r[4+ti]||0),0));
-      dayRows.push(['','','','TOTAL',...tots,tots.reduce((a,b)=>a+b,0)]);
-      const ws=XLSX.utils.aoa_to_sheet(dayRows);
-      ws['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},...TIENDAS.map(()=>({wch:11})),{wch:8}];
-      XLSX.utils.book_append_sheet(wb,ws,label);
+    LISTA.forEach(r=>{
+      const vals=TIENDAS.map(t=>estDayTienda(r.ID,t,day));
+      rows.push([r.T,r.P,r.ID,r.N,...vals,vals.reduce((a,b)=>a+b,0)]);
     });
-    filename=`DDM_Estimados_Tienda_${date}`;
+    const tots=TIENDAS.map((_,ti)=>rows.slice(1).reduce((s,r)=>s+(r[4+ti]||0),0));
+    rows.push(['','','','TOTAL',...tots,tots.reduce((a,b)=>a+b,0)]);
+    const ws=XLSX.utils.aoa_to_sheet(rows);
+    ws['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},...TIENDAS.map(()=>({wch:11})),{wch:8}];
+    XLSX.utils.book_append_sheet(wb,ws,dayLabel);
+    filename=`DDM_Estimados_${dayLabel}`;
 
   } else if(currentTab==='stock-resultante'){
     const dk=currentDesp;
