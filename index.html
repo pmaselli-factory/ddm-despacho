@@ -836,8 +836,8 @@ function exportXLSX(){
     filename=`DDM_Estimados_Producto_${date}`;
 
   } else if(currentTab==='est-tienda'){
-    const day=currentEstDay;
-    const dayLabel={vie:'Viernes',sab:'Sabado',dom:'Domingo'}[day];
+    const day=currentEstDay||'vie';
+    const dayLabel={vie:'Viernes',sab:'Sabado',dom:'Domingo'}[day]||'Viernes';
     const rows=[['TIPO','Pos','Num.Articulo','Articulo',...TIENDAS,'TOTAL']];
     LISTA.forEach(r=>{
       const vals=TIENDAS.map(t=>estDayTienda(r.ID,t,day));
@@ -848,7 +848,7 @@ function exportXLSX(){
     const ws=XLSX.utils.aoa_to_sheet(rows);
     ws['!cols']=[{wch:5},{wch:4},{wch:13},{wch:38},...TIENDAS.map(()=>({wch:11})),{wch:8}];
     XLSX.utils.book_append_sheet(wb,ws,dayLabel);
-    filename=`DDM_Estimados_${dayLabel}`;
+    filename='DDM_Estimados_'+dayLabel;
 
   } else if(currentTab==='stock-resultante'){
     const dk=currentDesp;
@@ -874,7 +874,7 @@ function exportXLSX(){
   }
 
   if(wb.SheetNames.length===0){showMsg('msg-despacho','No hay datos para exportar.','err');return;}
-  XLSX.writeFile(wb,`${filename}.xlsx`);
+  XLSX.writeFile(wb, filename+'.xlsx');
 }
 
 // Init
