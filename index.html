@@ -794,7 +794,8 @@ function exportXLSX(){
   if(currentTab==='despacho'){
     if(!currentDesp||!Object.keys(stockData).length){
       showMsg('msg-despacho','Subí el stock y elegí un despacho primero.','err');return;
-    }    const matrix=computeAllDispatches(currentDesp);
+    }
+    const matrix=computeAllDispatches(currentDesp);
     const rows=[['TIPO','Pos','Num.Articulo','Articulo','Camara DDM',...TIENDAS,'TOTAL']];
     LISTA.forEach(item=>{
       const sends=TIENDAS.map((t,i)=>{
