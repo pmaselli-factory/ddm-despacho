@@ -461,7 +461,13 @@ function importStock(inp){
       for(const row of rows){
         const v=String(row[0]||'').trim();
         if(TIENDA_HDR[v]){cur=TIENDA_HDR[v];if(!ns[cur])ns[cur]={};continue;}
-        if(cur){const id=parseInt(v);if(!isNaN(id)&&allIds.has(id))ns[cur][id]=parseInt(row[3])||0;}
+        if(cur){
+          const id=parseInt(v);
+          // Only take FIRST occurrence per tienda — file has subtotal sections that repeat items
+          if(!isNaN(id)&&allIds.has(id)&&ns[cur][id]===undefined){
+            ns[cur][id]=parseInt(row[3])||0;
+          }
+        }
       }
       const tc=Object.keys(ns).length;
       if(tc===0){showMsg('msg-despacho','No se encontraron tiendas en el archivo.','err');return;}
