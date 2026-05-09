@@ -392,10 +392,37 @@ function calcDispatchForProduct(id,dk){
 
   if(totalNeeded<=camaraDisp){
     // Enough stock for everyone — give each tienda what it needs (rounded to mult)
+    // But verify rounded totals don't exceed camara
     TIENDAS.forEach(t=>{
       const raw=needed[t];
       result[t]=raw<=0?0:Math.ceil(raw/mult)*mult;
     });
+    // Check if rounding pushed total over camara
+    const roundedTotal=Object.values(result).reduce((a,b)=>a+b,0);
+    if(roundedTotal>camaraDisp){
+      // Fall through to redistribution logic below
+      const fullObj={};
+      TIENDAS.forEach(t=>{
+        const totTienda=(DDM[id]||0)*getSh(id,t);
+        fullObj[t]=totTienda>0?totTienda:1;
+      });
+      const tiendaOrder=TIENDAS
+        .filter(t=>!(isPM&&AM_ONLY.includes(t)))
+        .filter(t=>needed[t]>0)
+        .sort((a,b)=>{
+          const ratioA=(stockData[a]?.[id]||0)/fullObj[a];
+          const ratioB=(stockData[b]?.[id]||0)/fullObj[b];
+          return ratioA-ratioB;
+        });
+      TIENDAS.forEach(t=>result[t]=0);
+      let remaining=Math.floor(camaraDisp/mult)*mult;
+      for(const t of tiendaOrder){
+        if(remaining<=0) break;
+        const toSend=Math.min(Math.ceil(needed[t]/mult)*mult,remaining);
+        result[t]=toSend;
+        remaining-=toSend;
+      }
+    }
   } else {
     // Not enough — distribute available stock prioritizing tiendas with lowest coverage ratio
     // Coverage ratio = current_stock / full_ddm_objective
