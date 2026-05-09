@@ -203,13 +203,23 @@ input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
     <div class="sidebar">
 
       <div class="section-card">
-        <h3>Stock on hand</h3>
+        <h3>Stock on hand — tiendas</h3>
         <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-inp').click()">
           <div class="upload-icon">↑</div>
-          <div class="upload-title">Subir archivo</div>
+          <div class="upload-title">Subir archivo tiendas</div>
           <div class="upload-sub">AAAA-MM-DD-HH-MM.xlsx</div>
         </div>
         <input id="file-inp" type="file" accept=".xlsx,.xls" style="display:none" onchange="importStock(this)">
+      </div>
+
+      <div class="section-card">
+        <h3>Stock remanente — planta</h3>
+        <div class="upload-zone" id="upload-zone-planta" onclick="document.getElementById('file-inp-planta').click()">
+          <div class="upload-icon">↑</div>
+          <div class="upload-title">Subir stock de planta</div>
+          <div class="upload-sub">StockonHand_planta.xls</div>
+        </div>
+        <input id="file-inp-planta" type="file" accept=".xlsx,.xls,.XLS" style="display:none" onchange="importPlanta(this)">
       </div>
 
       <div class="section-card">
@@ -313,6 +323,7 @@ const ID2F={23044:null,23043:null,22117:"Oreo Mix Bar",22064:"Trozo Tor Red Velv
 let stockData={};        // current stock on hand {tienda: {id: units}}
 let baselineStock={};    // thursday baseline stock (never changes once set)
 let dispatchedDDM={};   // cumulative DDM units dispatched {id: {tienda: units}}
+let plantaStock={};     // real remaining stock in planta (overrides calculated camara)
 let currentDesp=null;
 let currentEstDay='vie';
 let currentTab='despacho';
@@ -344,8 +355,9 @@ function getCovObj(id,t,dk){
   return d;
 }
 
-// Stock available in camara for DDM = total DDM - already dispatched to all tiendas
+// Stock available in camara: use real planta stock if loaded, otherwise calculate from DDM - dispatched
 function getCamaraDisponible(id){
+  if(Object.keys(plantaStock).length>0) return plantaStock[id]||0;
   const totalDDM=DDM[id]||0;
   const alreadyDispatched=TIENDAS.reduce((s,t)=>(dispatchedDDM[id]?.[t]||0)+s,0);
   return Math.max(0,totalDDM-alreadyDispatched);
@@ -491,7 +503,39 @@ function importStock(inp){
   reader.readAsArrayBuffer(file);inp.value='';
 }
 
-// ═══════════════════ DESPACHO ═══════════════════
+// ═══════════════════ PLANTA STOCK IMPORT ═══════════════════
+function importPlanta(inp){
+  const file=inp.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const wb=XLSX.read(ev.target.result,{type:'array'});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1});
+      const allIds=new Set(LISTA.map(r=>r.ID));
+      const ps={};
+      let found=0;
+      for(const row of rows){
+        try{
+          const id=parseInt(row[1]);
+          if(!isNaN(id)&&allIds.has(id)){
+            ps[id]=parseInt(row[4])||0;
+            found++;
+          }
+        }catch(e){}
+      }
+      if(found===0){showMsg('msg-despacho','No se encontraron ítems DDM en el archivo de planta.','err');return;}
+      plantaStock=ps;
+      const zone=document.getElementById('upload-zone-planta');
+      zone.classList.add('loaded');
+      zone.innerHTML=`<div class="upload-icon">✓</div><div class="upload-title">${file.name}</div><div class="upload-sub">${found} ítems · ${Object.values(ps).reduce((a,b)=>a+b,0)} uds en planta — click para cambiar</div>`;
+      showMsg('msg-despacho',`Stock planta cargado: <strong>${found} ítems</strong> · ${Object.values(ps).reduce((a,b)=>a+b,0).toLocaleString()} unidades totales`,'ok');
+      if(currentDesp) renderDespacho();
+    }catch(e){showMsg('msg-despacho','Error al leer archivo de planta: '+e.message,'err');}
+  };
+  reader.readAsArrayBuffer(file);
+  inp.value='';
+}
 function selectDesp(key){
   currentDesp=key;
   document.querySelectorAll('.desp-card').forEach(c=>c.classList.remove('active'));
